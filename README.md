@@ -1,6 +1,6 @@
 # Discussiondeck
 
-Discussiondeck-sovellus on keskustelualusta, jossa käyttäjät aloittaa uusia keskusteluketjuja eri aiheista.
+Discussiondeck-sovellus on keskustelualusta, jossa käyttäjät voivat aloittaa uusia keskusteluketjuja eri aiheista.
 
 
 ## Ominaisuudet
