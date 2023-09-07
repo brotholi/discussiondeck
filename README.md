@@ -10,7 +10,7 @@ Discussiondeck-sovellus on keskustelualusta, jossa käyttäjät voivat aloittaa 
 - Käyttäjät voivat aloittaa uuden keskusteluketjun ja antaa sille otsikon. Otsikkoa voi muuttaa.
 - Etusivulla käyttäjät näkevät keskusteluketjuja. Jokaisesta ketjusta näkee otsikon, aloittajan nimen, sekä tykkäysten ja kommenttien määrän.
 - Käyttäjät voivat tykätä ketjusta.
-- Käyttäjät voivat lisätä ketjuun kommentteja avaamalla ketjun näkyviin uuteen ikkunaan.
+- Käyttäjät voivat lisätä ketjuun kommentteja avaamalla ketjun näkyviin uuteen näkymään.
 - Käyttäjät näkevät muiden käyttäjien kommentit ja voivat tykätä kommenteista.
 - Keskusteluketjuun voi lisätä tunnisteen tai niin sanotun tagin.
 - Ketjun perustanut käyttäjä voi poistaa ketjun. Muut tavalliset käyttäjät eivät voi poistaa ketjua.
