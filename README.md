@@ -1,4 +1,4 @@
-#Discussiondeck
+# Discussiondeck
 
 Discussiondeck-sovellus on keskustelualusta, jossa käyttäjät aloittaa uusia keskusteluketjuja eri aiheista.
 
