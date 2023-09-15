@@ -1,0 +1,9 @@
+<!DOCTYPE html>
+<h1> Etusivu </h1>
+Kirjautuneena: {{ username }}
+<hr>
+{% for message in messages %}
+{{ message.content }}
+<hr>
+{% endfor %}
+<p>Aloita viestiketju</p>

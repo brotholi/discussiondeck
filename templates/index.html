@@ -1,3 +1,16 @@
+<!DOCTYPE html>
 <title>DiscussionDeck</title>
-<h1>Etusivu</h1>
-<b>Tervetuloa keskustelemaan</b>!
+<link rel="stylesheet" href="{{ url_for('static', filename='css/tyyli.css') }}">
+<h1>DiscussionDeck</h1>
+<b>Tervetuloa keskustelemaan</b>! <br>
+<img
+  src="{{ url_for('static', filename='images/eniac.png') }}"
+  class="image"
+/>
+<form action="/loginpage" method="POST">
+    Käyttäjätunnus: <br> 
+    <input type="text" name="username" minlength="1" maxlength="20"> <br>
+    Salasana: <br> 
+    <input type="text" name="password" size="20"> <br>
+    <input type="submit" value="Kirjaudu">
+    </form>
