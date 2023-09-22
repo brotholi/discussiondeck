@@ -1,0 +1,9 @@
+<!DOCTYPE html>
+<title>DiscussionDeck</title>
+<link rel="stylesheet" href="{{ url_for('static', filename='css/tyyli.css') }}">
+<b>Aloita keskustelu haluamastasi aiheesta</b>
+<form action="/create" method="POST">
+<p>Keskustelun otsikko:<br>
+<input type="text" name="topic" minlength="1" maxlength="50"> <br>       
+<input type="submit" value="Luo keskustelu">
+</form>

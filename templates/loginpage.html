@@ -1,9 +1,13 @@
 <!DOCTYPE html>
-<h1> Etusivu </h1>
-Kirjautuneena: {{ username }}
-<hr>
-{% for message in messages %}
-{{ message.content }}
-<hr>
-{% endfor %}
-<p>Aloita viestiketju</p>
+<title>Login</title>
+<b>Kirjaudu sisään:</b>
+<form action="/loginpage" method="POST">
+<p>Käyttäjätunnus:<br>
+<input type="text" name="username"></p>
+<p>Salasana:<br>
+<input type="password" name="password"></p>
+<input type="submit" value="Kirjaudu">
+</form>
+<p>Oletko uusi käyttäjä?</p>
+<a href="/register">Rekisteröidy</a> <br>
+<a href="/">Takaisin etusivulle</a>

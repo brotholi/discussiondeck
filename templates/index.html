@@ -1,16 +1,25 @@
 <!DOCTYPE html>
 <title>DiscussionDeck</title>
 <link rel="stylesheet" href="{{ url_for('static', filename='css/tyyli.css') }}">
-<h1>DiscussionDeck</h1>
+<h1> Etusivu </h1>
 <b>Tervetuloa keskustelemaan</b>! <br>
 <img
   src="{{ url_for('static', filename='images/eniac.png') }}"
   class="image"
-/>
-<form action="/loginpage" method="POST">
-    Käyttäjätunnus: <br> 
-    <input type="text" name="username" minlength="1" maxlength="20"> <br>
-    Salasana: <br> 
-    <input type="text" name="password" size="20"> <br>
-    <input type="submit" value="Kirjaudu">
-    </form>
+/> <br>
+{% if session.username %}
+<p>Olet kirjautunut nimellä {{ session.username }}</p>
+<a href="/logout">Kirjaudu ulos</a>
+{% else %}
+<a href="/loginpage">Kirjaudu sisään</a>
+{% endif %}
+<hr>
+{% for discussion in discussions %} <br>
+{{ discussion.topic }} <br>
+Luonut: {{ discussion.user_id}} <br>
+Luotu: {{ discussion.created.strftime("%Y-%m-%d %H:%M:%S") }} <br>
+Tykkäyksiä: {{ discussion.likes}} <br>
+<hr>
+{% endfor %}
+<a href="/create">Uusi keskustelu</a>
+
