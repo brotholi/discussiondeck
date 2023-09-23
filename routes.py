@@ -18,7 +18,8 @@ def create():
         if len(topic) == 0:
             return render_template("error.html", 
                                    message="Keskusteluaihe ei voi olla tyhjä")
-        if not decks.create_discussion(topic):
+        create_discussion= decks.create_discussion(topic)
+        if not create_discussion:
             return render_template("error.html", 
                                    message="Kirjaudu tai luo käyttäjä ennen viestin luomista")
         return redirect("/")

@@ -38,10 +38,8 @@ def register(username, password):
     return True
 
 def get_user_id():
-    user = session.get("user_id", 0)
-    if not user:
-        return None
-    return user
+    return session.get("user_id", 0)
+
 
 def generate_password(password):
     hash_value = generate_password_hash(password)

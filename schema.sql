@@ -12,12 +12,4 @@ CREATE TABLE discussions (
 	likes INTEGER
 );
 
-CREATE TABLE comments (
-	id SERIAL PRIMARY KEY,
-	discussion_id INTEGER REFERENCES discussions,
-	content TEXT,
-	user TEXT,
-	likes INTEGER
-);
-
 
