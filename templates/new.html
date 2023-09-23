@@ -3,7 +3,21 @@
 <link rel="stylesheet" href="{{ url_for('static', filename='css/tyyli.css') }}">
 <b>Aloita keskustelu haluamastasi aiheesta</b>
 <form action="/create" method="POST">
-<p>Keskustelun otsikko:<br>
+<p>Keskustelun aihe:<br>
 <input type="text" name="topic" minlength="1" maxlength="50"> <br>       
 <input type="submit" value="Luo keskustelu">
 </form>
+
+<script>
+    function check(form) {
+        if (form.topic.value.length <= 0) {
+            alert("Otsikko on liian lyhyt");
+            return false;
+        }
+        if (form.topic.value.length > 50) {
+            alert("Otsikko on liian pitkä");
+            return false;
+        }
+        return true;
+    }
+</script>

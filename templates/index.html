@@ -16,7 +16,11 @@
 <hr>
 {% for discussion in discussions %} <br>
 {{ discussion.topic }} <br>
-Luonut: {{ discussion.user_id}} <br>
+{% for user in users %}
+  {% if user.user_id == discussion.user_id %}
+    Käyttäjänimi: {{ user.username }} <br>
+  {% endif %}
+{% endfor %}
 Luotu: {{ discussion.created.strftime("%Y-%m-%d %H:%M:%S") }} <br>
 Tykkäyksiä: {{ discussion.likes}} <br>
 <hr>

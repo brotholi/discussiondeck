@@ -1,7 +1,7 @@
 from app import app
+from flask import redirect, render_template, request, session
 import decks
 import users
-from flask import redirect, render_template, request, session
 
 @app.route("/")
 def index():
@@ -13,25 +13,28 @@ def index():
 def create():
     if request.method == "GET":
         return render_template("new.html")
-
     if request.method == "POST":
         topic = request.form["topic"]
-        decks.create_discussion(topic)
+        if len(topic) == 0:
+            return render_template("error.html", 
+                                   message="Keskusteluaihe ei voi olla tyhjä")
+        if not decks.create_discussion(topic):
+            return render_template("error.html", 
+                                   message="Kirjaudu tai luo käyttäjä ennen viestin luomista")
         return redirect("/")
 
 @app.route("/loginpage", methods=["GET", "POST"])
 def loginpage():
     if request.method == "GET":
         return render_template("loginpage.html")
-    
     if request.method == "POST":
         username = request.form["username"]
         password = request.form["password"]
         if not users.login(username, password):
-            return render_template("error.html", message="Väärä käyttäjätunnus tai salasana")
-        else:
-            session["username"] = username
-            return redirect("/")
+            return render_template("error.html", 
+                                   message="Väärä käyttäjätunnus tai salasana")
+        session["username"] = username
+        return redirect("/")
 
 @app.route("/logout")
 def logout():
@@ -42,13 +45,10 @@ def logout():
 def register():
     if request.method == "GET":
         return render_template("register.html")
-    
     if request.method == "POST":
         username = request.form["username"]
         password = request.form["password"]
         if not users.register(username, password):
-            return render_template("error.html", message="Käyttäjätunnus on jo olemassa")
-        else:
-            return redirect("/loginpage")
-    
-    
+            return render_template("error.html", 
+                                   message="Anna validi käyttäjätunnus ja salasana")
+        return redirect("/")

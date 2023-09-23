@@ -1,6 +1,6 @@
+from sqlalchemy.sql import text
 from db import db
 import users
-from sqlalchemy.sql import text
 
 def get_discussions():
     sql = "SELECT topic, created, likes FROM discussions ORDER BY created DESC"
@@ -9,9 +9,10 @@ def get_discussions():
     return discussions
 
 def create_discussion(topic):
-    user_id = users.user_id()
+    user_id = users.get_user_id()
+    if not user_id:
+        return False
     sql = "INSERT INTO discussions (user_id, topic, created, likes) VALUES (:user_id, :topic, NOW(), 0) RETURNING id"
-    result = db.session.execute(text(sql), {"topic":topic, "user_id":user_id})
-    discussion_id = result.fetchone()[0]
+    db.session.execute(text(sql), {"topic":topic, "user_id":user_id})
     db.session.commit()
-    return discussion_id
+    return True
