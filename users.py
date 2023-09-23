@@ -19,7 +19,7 @@ def login(username, password):
 
     if check_password_hash(hash_value, password):
         session["user_id"] = user[0]
-        session["user_name"] = username
+        session["username"] = username
         return True
     return False
     
@@ -53,3 +53,8 @@ def check_if_user_exists(username):
         return False
     return True
 
+def find_user_id(user_id):
+    sql = "SELECT COUNT(*) FROM users WHERE id=:user_id"
+    result = db.session.execute(text(sql), {"user_id":user_id})
+    user_id = result.fetchone()[0]
+    return user_id

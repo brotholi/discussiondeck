@@ -10,7 +10,8 @@ def get_discussions():
 
 def create_discussion(topic):
     user_id = users.get_user_id()
-    if not user_id:
+    number_of_users = users.find_user_id(user_id)
+    if number_of_users == 0:
         return False
     sql = "INSERT INTO discussions (user_id, topic, created, likes) VALUES (:user_id, :topic, NOW(), 0) RETURNING id"
     db.session.execute(text(sql), {"topic":topic, "user_id":user_id})

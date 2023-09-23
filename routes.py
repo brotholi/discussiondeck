@@ -34,12 +34,12 @@ def loginpage():
         if not users.login(username, password):
             return render_template("error.html", 
                                    message="Väärä käyttäjätunnus tai salasana")
-        session["username"] = username
         return redirect("/")
 
 @app.route("/logout")
 def logout():
     del session["username"]
+    del session["user_id"]
     return redirect("/")
 
 @app.route("/register", methods=["GET", "POST"])
