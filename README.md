@@ -4,13 +4,13 @@ Discussiondeck-sovellus on keskustelualusta, jossa käyttäjät voivat aloittaa 
 
 
 ## Ominaisuudet
-# välipalautusta varten toteutettu seuraavat ominaisuudet
+### välipalautusta varten toteutettu seuraavat ominaisuudet
 - Sovellukseen voi luoda käyttäjätunnuksen. Käyttäjätunnus vaatii salasanan.
 - Käyttäjät voivat kirjautua sovellukseen.
 - Käyttäjät voivat aloittaa uuden keskusteluketjun ja antaa sille otsikon.
 - Etusivulla käyttäjät näkevät keskusteluketjuja. Jokaisesta ketjusta näkee otsikon, aloituspäivän sekä tykkäysten määrän.
 
-# Toteuttamatta:
+### Toteuttamatta:
 - Sovelluksessa kahdenlaisia käyttäjiä, pääkäyttäjiä ja tavallisia käyttäjiä.
 - Keskusteluketjun otsikkoa voi muuttaa.
 - Jokaisesta ketjusta näkee myös aloittajan nimen ja kommenttien määrän.
