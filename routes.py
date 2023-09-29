@@ -1,13 +1,14 @@
 from app import app
-from flask import redirect, render_template, request, session
-import decks
+from flask import redirect, render_template, request, url_for
+import discussions
 import users
+import decks
 
 @app.route("/")
 def index():
-    discussions = decks.get_discussions()
+    all_discussions = discussions.get_discussions()
     all_users = users.get_all_users()
-    return render_template("index.html", discussions=discussions, all_users=all_users)
+    return render_template("index.html", discussions=all_discussions, all_users=all_users)
 
 @app.route("/loginpage", methods=["GET", "POST"])
 def loginpage():
@@ -56,23 +57,33 @@ def create():
         return render_template("new.html")
     if request.method == "POST":
         # users.check_csrf()
-
         topic = request.form["topic"]
+        content = request.form["content"]
         if len(topic) == 0:
             return render_template("error.html", 
                                    message="Keskusteluaihe ei voi olla tyhjä")
-        create_discussion= decks.create_discussion(topic)
+        if len(content) == 0:
+            return render_template("error.html", 
+                                   message="Viesti ei voi olla tyhjä")
+        create_discussion= discussions.create_discussion(topic, content)
         if not create_discussion:
             return render_template("error.html", 
                                    message="Kirjaudu tai luo käyttäjä ennen viestin luomista")
         return redirect("/discussions")
     
 @app.route("/discussions")
-def discussions():
-        discussions = decks.get_discussions()
-        return render_template("discussions.html", discussions=discussions)
+def show_discussions():
+        all_discussions = discussions.get_discussions()
+        return render_template("discussions.html", discussions=all_discussions)
 
-@app.route("/discussion/<int:discussion_id>")
+@app.route("/discussions/<int:discussion_id>")
 def show_discussion(discussion_id):
-    discussion_information = decks.get_discussion_information(discussion_id)
-    return render_template("open.html", discussion_information=discussion_information)
+    discussion_information = decks.get_discussion_deck(discussion_id)
+    return render_template("deck.html", discussion_information=discussion_information)
+
+@app.route("/discussions/<int:discussion_id>/like", methods=["POST"])
+def like(discussion_id):
+    if not decks.like(discussion_id):
+        return render_template("error.html", 
+                               message="Tykkäys ei onnistunut")
+    return redirect(url_for('show_discussion',discussion_id = discussion_id))

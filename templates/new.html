@@ -2,25 +2,20 @@
 {% block title %} Aloita keskustelu {% endblock %}
 {% block content %}
 <h2> Aloita keskustelu </h2>
-<b>Luo uusi keskusteluketju</b>
+{% if not session.username %}
+<p>Et ole kirjautunut sisään<br>
+<a href="/loginpage">Kirjaudu</a><br>
+</p>
+{% endif %}
+<b>Luo uusi keskusteluketju</b><br><br>
 <form action="/create" method="POST">
-<p>Keskustelun aihe:<br>
-<input type="text" name="topic" minlength="1" maxlength="50"> <br>       
-<input type="submit" value="Luo keskustelu">
+    <label for="text">Keskustelun aihe:</label><br><br>
+    <textarea id="text" name="topic" rows="2" cols="50">
+    </textarea><br><br>
+    <label for="textbox">Keskustelun aloitusviesti:</label><br><br>
+    <textarea id="textbox" name="content" rows="15" cols="50">
+    </textarea><br><br>
+    <input type="submit" class="button" value="Luo Keskustelu">
 </form>
-
-<script>
-    function check(form) {
-        if (form.topic.value.length <= 0) {
-            alert("Otsikko on liian lyhyt");
-            return false;
-        }
-        if (form.topic.value.length > 50) {
-            alert("Otsikko on liian pitkä");
-            return false;
-        }
-        return true;
-    }
-</script>
     
 {% endblock %}

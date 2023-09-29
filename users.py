@@ -61,6 +61,12 @@ def check_if_user_exists(username):
         return False
     return True
 
+def find_username(user_id):
+    sql = "SELECT username FROM users WHERE id=:user_id"
+    result = db.session.execute(text(sql), {"user_id":user_id})
+    username = result.fetchone()[0]
+    return username
+
 def find_user_id(user_id):
     sql = "SELECT COUNT(*) FROM users WHERE id=:user_id"
     result = db.session.execute(text(sql), {"user_id":user_id})
