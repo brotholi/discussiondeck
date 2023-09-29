@@ -23,6 +23,8 @@ Discussiondeck-sovellus on keskustelualusta, jossa käyttäjät voivat aloittaa 
 - Sovelluksessa on hakutoiminto, jolla voi hakea ketjuja. Hakutoiminto etsii ketjuja, joissa on hakusanaa vastaava sana tai joissa on hakusanaa vastaava tunniste eli tag.
 
 ## Käynnistysohjeet:
+Ennen käynnistystä asenna PostgreSQL kurssin ohjeiden mukaisesti 
+Käynnistä tietokanta komennolla start-pg.sh
 
 Kloonaa discussiondeck-repositorio omalle koneellesi ja siirry sen juurikansioon. Luo kansioon .env-tiedosto ja määritä sen sisältö seuraavanlaiseksi:
 
