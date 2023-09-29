@@ -1,0 +1,14 @@
+{% extends "layout.html" %}
+{% block title %} Keskustelut {% endblock %}
+{% block content %}
+<a href="/create">Aloita keskustelu</a></li>
+<h2> Keskustelut </h2>
+{% for discussion in discussions %}
+<a href="/discussions/{{ discussion.id }}">{{ discussion.topic }}</a> <br>
+Luotu: {{ discussion.created.strftime("%Y-%m-%d %H:%M:%S") }} <br>
+Tykkäyksiä: {{ discussion.likes}} <br>
+<hr>
+{% endfor %}
+{% endblock %}
+
+

@@ -1,7 +1,8 @@
-<!DOCTYPE html>
-<title>DiscussionDeck</title>
-<link rel="stylesheet" href="{{ url_for('static', filename='css/tyyli.css') }}">
-<b>Aloita keskustelu haluamastasi aiheesta</b>
+{% extends "layout.html" %}
+{% block title %} Aloita keskustelu {% endblock %}
+{% block content %}
+<h2> Aloita keskustelu </h2>
+<b>Luo uusi keskusteluketju</b>
 <form action="/create" method="POST">
 <p>Keskustelun aihe:<br>
 <input type="text" name="topic" minlength="1" maxlength="50"> <br>       
@@ -21,3 +22,5 @@
         return true;
     }
 </script>
+    
+{% endblock %}

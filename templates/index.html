@@ -1,19 +1,17 @@
-<!DOCTYPE html>
-<title>DiscussionDeck</title>
-<link rel="stylesheet" href="{{ url_for('static', filename='css/tyyli.css') }}">
-<h1> Etusivu </h1>
+{% extends "layout.html" %}
+{% block title %} Etusivu {% endblock %}
+{% block content %}
+<h2> Etusivu </h2>
 <b>Tervetuloa keskustelemaan</b>! <br>
-<img
-  src="{{ url_for('static', filename='images/eniac.png') }}"
-  class="image"
-/> <br>
+<!-- <img -->
+  <!-- src="{{ url_for('static', filename='images/eniac.png') }}" -->
+  <!-- class="image" -->
+<!-- /> <br> -->
 {% if session.username %}
 <p>Olet kirjautunut nimellä {{ session.username }}</p>
 <a href="/logout">Kirjaudu ulos</a>
-{% else %}
-<a href="/loginpage">Kirjaudu sisään</a>
 {% endif %}
-<hr>
+<h3>Uusimmat keskustelut</h3>
 {% for discussion in discussions %} <br>
 {{ discussion.topic }} <br>
 Luotu: {{ discussion.created.strftime("%Y-%m-%d %H:%M:%S") }} <br>
@@ -21,4 +19,6 @@ Tykkäyksiä: {{ discussion.likes}} <br>
 <hr>
 {% endfor %}
 <a href="/create">Uusi keskustelu</a>
+{% endblock %}
+
 

@@ -1,5 +1,7 @@
-<!DOCTYPE html>
-<title>Login</title>
+{% extends "layout.html" %}
+{% block title %} Kirjautuminen {% endblock %}
+{% block content %}
+<h2> Kirjautuminen </h2>
 <b>Kirjaudu sisään:</b>
 <form action="/loginpage" method="POST">
 <p>Käyttäjätunnus:<br>
@@ -10,3 +12,4 @@
 </form>
 Oletko uusi käyttäjä? Rekisteröidy <a href="/register">tästä</a> <br>
 <a href="/">Takaisin etusivulle</a>
+{% endblock %}

@@ -17,3 +17,6 @@ def create_discussion(topic):
     db.session.execute(text(sql), {"topic":topic, "user_id":user_id})
     db.session.commit()
     return True
+
+def get_discussion_information(discussion_id):
+    pass

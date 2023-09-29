@@ -1,5 +1,6 @@
+import os
 from db import db
-from flask import session
+from flask import session, request, abort
 from sqlalchemy.sql import text
 from werkzeug.security import check_password_hash, generate_password_hash
 
@@ -14,32 +15,39 @@ def login(username, password):
     result = db.session.execute(text(sql), {"username":username})
     user = result.fetchone()
     if not user:
-        return False
-    hash_value = user.password
+        return_values = [False, "Väärä käyttäjätunnus"]
+        return return_values
 
-    if check_password_hash(hash_value, password):
-        session["user_id"] = user[0]
-        session["username"] = username
-        return True
-    return False
+    if not check_password_hash(user[1], password):
+        return_values = [False, "Väärä salasana"]
+        return return_values
+    session["user_id"] = user[0]
+    session["username"] = username
+    session["csrf_token"] = os.urandom(16).hex()
+    return_values = [True]
+    return return_values
+
     
-def register(username, password):
-    if len(username) <= 5:
-        return False
-    if len(password) == 0:
-        return False
+def register(username, password1):
     if check_if_user_exists(username):
         return False
-    password_hash = generate_password(password)
+    password_hash = generate_password(password1)
     sql = "INSERT INTO users (username, password) VALUES (:username, :password)"
     db.session.execute(text(sql), {"username":username, "password":password_hash})
     db.session.commit()
-    login(username, password)
+    login(username, password1)
     return True
+
+def logout():
+    del session["username"]
+    del session["user_id"] 
 
 def get_user_id():
     return session.get("user_id", 0)
 
+def check_csrf():
+    if session["csrf_token"] != request.form["csrf_token"]:
+        abort(403)
 
 def generate_password(password):
     hash_value = generate_password_hash(password)
