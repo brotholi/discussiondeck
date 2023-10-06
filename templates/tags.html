@@ -1,17 +1,18 @@
 {% extends "layout.html" %}
 {% block title %} Lisää tunnisteita{% endblock %}
 {% block content %}
-Haluatko lisätä tunnisteita?<br>
-<a href="/discussions">Ohita</a> <br>
-Lisää tunnisteita (max 5):</b><br>
+<h3>Haluatko lisätä tunnisteita?</h3> <a href="/discussions">Ohita</a> <br><br>
+<b>Lisää tunnisteita (max 5):</b><br><br>
 <form action="/tags" method="POST">
 <label for="tag">Uusi tunniste:</label><br>
-<textarea id="tag" name="tag" rows="1" cols="20"></textarea><br><br>
+<textarea id="tag" name="tag" rows="1" cols="20"></textarea><br>
 <input type="submit" class="small_button" value="Lisää">
+<input type="hidden" name="csrf_token" value="{{ session.csrf_token }}">
 </form> 
+<br><br>
 {% if tags %}
 {% for tag in tags %}
-{{ tag.tag }} <br>
+{{ tag.tag }}
 {% endfor %}
 {% endif %}
 <form action="/discussions" method="GET">

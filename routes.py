@@ -56,7 +56,7 @@ def register():
 def result():
     query = request.args["query"]
     result = discussions.find_discussions_by_keyword(query)
-    
+
     return render_template("result.html", discussions=result)
 
 @app.route("/create", methods=["GET", "POST"])
@@ -64,7 +64,7 @@ def create():
     if request.method == "GET":
         return render_template("new.html", tags=[])
     if request.method == "POST":
-        # TODO users.check_csrf()
+        users.check_csrf()
         topic = request.form["topic"]
         content = request.form["content"]    
         if len(topic) == 0:
@@ -108,6 +108,7 @@ def comment(discussion_id):
         deck_comments = discussion_comments
         return render_template("comment.html", comments=deck_comments, discussion_id=discussion_id)
     if request.method == "POST":
+        users.check_csrf()
         comment_content = request.form["content"]
         if len(comment_content ) == 0:
             return render_template("error.html", 
@@ -123,6 +124,7 @@ def tags():
     if request.method == "GET":
         return render_template("tags.html", discussion_tags=[])
     if request.method == "POST":
+        users.check_csrf()
         tag = request.form["tag"]
         if len(tag) == 0:
             return render_template("error.html", 
