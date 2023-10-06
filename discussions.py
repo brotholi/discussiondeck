@@ -3,7 +3,7 @@ from db import db
 import users
 
 def get_discussions():
-    sql = "SELECT id, user_id, topic, created, likes FROM discussions ORDER BY created DESC"
+    sql= "SELECT d.id, d.user_id, u.username, d.topic, d.created, d.likes FROM discussions d JOIN users u ON d.user_id = u.id ORDER BY d.created DESC"
     result = db.session.execute(text(sql))
     discussions = result.fetchall()
     return discussions

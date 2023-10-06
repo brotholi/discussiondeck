@@ -14,6 +14,7 @@
 <h3>Uusimmat keskustelut</h3>
 {% for discussion in discussions %} <br>
 {{ discussion.topic }} <br>
+Aloittanut: {{ discussion.username }} <br>
 Luotu: {{ discussion.created.strftime("%Y-%m-%d %H:%M:%S") }} <br>
 Tykkäyksiä: {{ discussion.likes}} <br>
 <hr>

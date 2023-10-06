@@ -30,5 +30,6 @@ CREATE TABLE comments (
 CREATE TABLE tags (
 	id SERIAL PRIMARY KEY,
 	discussion_id INTEGER REFERENCES discussions,
-	tag TEXT
+	tag TEXT,
+	created TIMESTAMP
 );

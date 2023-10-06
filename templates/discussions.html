@@ -5,6 +5,7 @@
 <h2> Keskustelut </h2>
 {% for discussion in discussions %}
 <a href="/discussions/{{ discussion.id }}">{{ discussion.topic }}</a> <br>
+Aloittanut: {{ discussion.username }} <br>
 Luotu: {{ discussion.created.strftime("%Y-%m-%d %H:%M:%S") }} <br>
 Tykkäyksiä: {{ discussion.likes}} <br>
 <hr>

@@ -1,8 +1,9 @@
 from app import app
-from flask import redirect, render_template, request, url_for
+from flask import redirect, render_template, request, url_for, session
 import discussions
 import users
 import decks
+import extras
 
 @app.route("/")
 def index():
@@ -49,16 +50,16 @@ def register():
         if not users.register(username, password1):
             return render_template("error.html", 
                                    message="Käyttäjätunnus on jo käytössä")
-        return redirect("/loginpage")
+        return redirect("/")
 
 @app.route("/create", methods=["GET", "POST"])
 def create():
     if request.method == "GET":
-        return render_template("new.html")
+        return render_template("new.html", tags=[])
     if request.method == "POST":
-        # users.check_csrf()
+        # TODO users.check_csrf()
         topic = request.form["topic"]
-        content = request.form["content"]
+        content = request.form["content"]    
         if len(topic) == 0:
             return render_template("error.html", 
                                    message="Keskusteluaihe ei voi olla tyhjä")
@@ -69,7 +70,7 @@ def create():
         if not create_discussion:
             return render_template("error.html", 
                                    message="Kirjaudu tai luo käyttäjä ennen viestin luomista")
-        return redirect("/discussions")
+        return render_template("tags.html")
     
 @app.route("/discussions")
 def show_discussions():
@@ -79,7 +80,12 @@ def show_discussions():
 @app.route("/discussions/<int:discussion_id>")
 def show_discussion(discussion_id):
     discussion_information = decks.get_discussion_deck(discussion_id)
-    return render_template("deck.html", discussion_information=discussion_information)
+    discussion_comments = decks.get_comments(discussion_id)
+    if len(discussion_comments) <= 5:
+        deck_comments = discussion_comments
+    else:
+        deck_comments = discussion_comments[:5]
+    return render_template("deck.html", discussion_information=discussion_information, comments=deck_comments)
 
 @app.route("/discussions/<int:discussion_id>/like", methods=["POST"])
 def like(discussion_id):
@@ -87,3 +93,41 @@ def like(discussion_id):
         return render_template("error.html", 
                                message="Tykkäys ei onnistunut")
     return redirect(url_for('show_discussion',discussion_id = discussion_id))
+
+@app.route("/discussions/<int:discussion_id>/all_comments", methods=["GET", "POST"])
+def comment(discussion_id):
+    if request.method == "GET":
+        discussion_comments = decks.get_comments(discussion_id)
+        deck_comments = discussion_comments
+        return render_template("comment.html", comments=deck_comments, discussion_id=discussion_id)
+    if request.method == "POST":
+        comment_content = request.form["content"]
+        if len(comment_content ) == 0:
+            return render_template("error.html", 
+                                message="Kommentti ei voi olla tyhjä")
+        if not decks.comment(discussion_id, comment_content):
+            return render_template("error.html", 
+                                message="Kirjaudu tai luo käyttäjä ennen kommentin lisäämistä")
+        return redirect(url_for('show_discussion', discussion_id = discussion_id))
+    
+
+@app.route("/tags", methods=["GET", "POST"])
+def tags():
+    if request.method == "GET":
+        return render_template("tags.html", discussion_tags=[])
+    if request.method == "POST":
+        tag = request.form["tag"]
+        if len(tag) == 0:
+            return render_template("error.html", 
+                                message="Tunniste ei voi olla tyhjä")
+        all_discussions = discussions.get_discussions()
+        newest_discussion = all_discussions[0]
+        id = newest_discussion[0]
+        if len(extras.get_discussion_tags(id)) == 5:
+            return render_template("error.html", message="Tunnisteita ei voi olla yli viisi")
+        else:
+            discussion_tags = extras.create_tag(tag, id)
+            if not discussion_tags:
+                return render_template("error.html", 
+                                message="Tagi on jo olemassa")
+        return render_template("tags.html", tags = discussion_tags)

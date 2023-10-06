@@ -4,17 +4,29 @@
 <h2> {{ discussion_information[0].topic}} </h2>
 <b>Keskustelun aloitti:</b> {{ discussion_information[1] }} <br>
 <b>Luotu:</b> {{ discussion_information[0].created.strftime("%d.%m.%Y klo %H:%M") }} <br>
-{{ discussion_information[0].content }} <br>
-<b>Tykkäyksiä:</b>{{ discussion_information[0].likes}} <br>
-<form action="/discussions/{{ discussion_information[0].id }}/like" method="POST">
-    <input type="submit" value="Tykkää">
+<p class="textbody">{{ discussion_information[0].content }}</p>
+<p class="background_text"> Tykkäyksiä: {{ discussion_information[0].likes}} </p>
+    <form action="/discussions/{{ discussion_information[0].id }}/like" method="POST">
+    <button> <img src="{{ url_for('static', filename='images/like-button.png') }}" width="30" height="30" /> </button>
 </form>
 <hr>
-Kommentit:  <br>
-Tähän tulee keskustelun kommentit
+<h3>Kommentit</h3>
+{% if not comments %}
+<p class="background_text"> Ei kommentteja </p>
+{% endif %}
+{% for comment in comments %}
+{% if comment.id % 2 == 0 %}
+<p class="commentbody">
+{% else %}
+<p class="graycommentbody">
+{% endif %}
+<b>{{ comment.username }} </b> <br>
+{{ comment.content }} <br>
+{{ comment.created.strftime("%d.%m.%Y klo %H:%M") }}</p>
+{% endfor %} 
+<br>
+<form action="/discussions/{{ discussion_information[0].id }}/all_comments" method="GET">    
+    <input type="submit" class="button" value="Kommentoi">
+</form>
 {% endblock %}
 
-<!-- <form action="/comment" method="POST">    -->
-    <!-- <input type="text" name="comment"> -->
-    <!-- <input type="submit" value="Kommentoi"> -->
-<!-- </form> -->

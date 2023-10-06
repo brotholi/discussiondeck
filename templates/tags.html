@@ -1,0 +1,20 @@
+{% extends "layout.html" %}
+{% block title %} Lisää tunnisteita{% endblock %}
+{% block content %}
+Haluatko lisätä tunnisteita?<br>
+<a href="/discussions">Ohita</a> <br>
+Lisää tunnisteita (max 5):</b><br>
+<form action="/tags" method="POST">
+<label for="tag">Uusi tunniste:</label><br><br>
+<textarea id="tag" name="tag" rows="1" cols="20"></textarea><br><br>
+<input type="submit" class="small_button" value="Lisää">
+</form> 
+{% if tags %}
+{% for tag in tags %}
+{{ tag }} <br>
+{% endfor %}
+{% endif %}
+{% endblock %}
+<form action="/dicussions" method="GET">
+    <input type= "submit" class="small_button" value="Valmis">
+</form>
