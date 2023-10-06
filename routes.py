@@ -51,6 +51,13 @@ def register():
             return render_template("error.html", 
                                    message="Käyttäjätunnus on jo käytössä")
         return redirect("/")
+    
+@app.route("/result")
+def result():
+    query = request.args["query"]
+    result = discussions.find_discussions_by_keyword(query)
+    
+    return render_template("result.html", discussions=result)
 
 @app.route("/create", methods=["GET", "POST"])
 def create():
@@ -126,8 +133,6 @@ def tags():
         if len(extras.get_discussion_tags(id)) == 5:
             return render_template("error.html", message="Tunnisteita ei voi olla yli viisi")
         else:
-            discussion_tags = extras.create_tag(tag, id)
-            if not discussion_tags:
-                return render_template("error.html", 
-                                message="Tagi on jo olemassa")
-        return render_template("tags.html", tags = discussion_tags)
+            extras.create_tag(tag, id)
+            discussion_tags = extras.get_discussion_tags(id)
+            return render_template("tags.html", tags = discussion_tags)

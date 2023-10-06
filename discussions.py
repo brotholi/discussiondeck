@@ -24,4 +24,10 @@ def get_one_discussion(discussion_id):
     result = db.session.execute(text(sql), {"discussion_id":discussion_id})
     discussion = result.fetchone()
     return discussion
+
+def find_discussions_by_keyword(query):
+    sql= "SELECT d.id, d.user_id, u.username, d.topic, d.created, d.likes FROM discussions d JOIN users u ON d.user_id = u.id WHERE d.topic LIKE :keyword ORDER BY d.created DESC"
+    result = db.session.execute(text(sql), {"keyword":query})
+    discussions = result.fetchall()
+    return discussions
     

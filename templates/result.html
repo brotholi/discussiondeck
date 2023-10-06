@@ -1,0 +1,21 @@
+{% extends "layout.html" %}
+{% block title %} Hakutulos {% endblock %}
+{% block content %}
+{% if discussions %}
+{% for discussion in discussions %}
+<a href="/discussions/{{ discussion.id }}">{{ discussion.topic }}</a> <br>
+Aloittanut: {{ discussion.username }} <br>
+Luotu: {{ discussion.created.strftime("%Y-%m-%d %H:%M:%S") }} <br>
+Tykkäyksiä: {{ discussion.likes}} <br>
+<hr>
+{% endfor %}
+{% else %}
+<p class="background_text">Ei hakutuloksia</p>
+{% endif %}
+<form action="/result" method="GET">
+    Hakusana: <input type="text" name="query">
+    <br>
+    <input type="submit" value="Lähetä">
+</form>
+{% endblock %}
+
