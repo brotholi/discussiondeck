@@ -6,7 +6,7 @@
 <p>Et ole kirjautunut sisään<br>
 <a href="/loginpage">Kirjaudu</a><br>
 </p>
-{% endif %}
+{% else %}
 <b>Luo uusi keskusteluketju</b><br><br>
 <form action="/create" method="POST">
     <label for="text">Keskustelun aihe:</label><br><br>
@@ -16,4 +16,5 @@
     <input type="submit" class="button" value="Luo Keskustelu">
     <input type="hidden" name="csrf_token" value="{{ session.csrf_token }}">
 </form>
+{% endif %}
 {% endblock %}
