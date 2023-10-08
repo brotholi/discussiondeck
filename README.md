@@ -4,7 +4,7 @@ Discussiondeck-sovellus on keskustelualusta, jossa käyttäjät voivat aloittaa 
 
 
 ## Ominaisuudet
-### Nykyinen tilanne (6.10.2023)
+### Nykyinen tilanne (8.10.2023)
 - Sovellukseen voi luoda käyttäjätunnuksen. Käyttäjätunnus vaatii salasanan.
 - Käyttäjät voivat kirjautua sovellukseen.
 - Käyttäjät voivat aloittaa uuden keskusteluketjun ja antaa sille otsikon. Ketjulle annetaan myös sisältö.
