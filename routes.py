@@ -46,8 +46,13 @@ def register():
         if password1 != password2:
             return render_template("error.html", 
                                    message="Salasanat eivät täsmää")
+            
+        role = request.form["role"]
+        if role not in ("1", "2"):
+            return render_template("error.html", message="Tuntematon käyttäjärooli")    
 
-        if not users.register(username, password1):
+
+        if not users.register(username, password1, role):
             return render_template("error.html", 
                                    message="Käyttäjätunnus on jo käytössä")
         return redirect("/")

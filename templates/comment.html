@@ -1,12 +1,18 @@
 {% extends "layout.html" %}
 {% block content %}
 <a href="/discussions/{{ discussion_id }}">Takaisin keskusteluun</a> <br><br>
+{% if not session.username %}
+<p>Et ole kirjautunut sisään<br>
+<a href="/loginpage">Kirjaudu</a><br>
+</p>
+{% else %}
 <h3>Lisää kommentti</h3>
 <form action="/discussions/{{ discussion_id }}/all_comments" method="POST">
     <textarea id="textbox" name="content" rows="10" cols="50"></textarea><br><br>
     <input type="submit" class="button" value="Kommentoi">
     <input type="hidden" name="csrf_token" value="{{ session.csrf_token }}">
 </form>
+{% endif %}
 <h3>Kommentit</h3>
 {% if not comments %}
 <p class="background_text"> Ei kommentteja </p>

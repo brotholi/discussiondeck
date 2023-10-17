@@ -12,7 +12,7 @@ def get_all_users():
     return users
 
 def login(username, password):
-    sql = "SELECT id, password FROM users WHERE username=:username"
+    sql = "SELECT id, password, role FROM users WHERE username=:username"
     result = db.session.execute(text(sql), {"username":username})
     user = result.fetchone()
     if not user:
@@ -24,17 +24,18 @@ def login(username, password):
         return return_values
     session["user_id"] = user[0]
     session["username"] = username
+    session["user_role"] = user[2]
     session["csrf_token"] = secrets.token_hex(16)
     return_values = [True]
     return return_values
 
     
-def register(username, password1):
+def register(username, password1, role):
     if check_if_user_exists(username):
         return False
     password_hash = generate_password(password1)
-    sql = "INSERT INTO users (username, password) VALUES (:username, :password)"
-    db.session.execute(text(sql), {"username":username, "password":password_hash})
+    sql = "INSERT INTO users (username, password, role) VALUES (:username, :password, :role)"
+    db.session.execute(text(sql), {"username":username, "password":password_hash, "role":role})
     db.session.commit()
     login(username, password1)
     return True
@@ -42,6 +43,7 @@ def register(username, password1):
 def logout():
     del session["username"]
     del session["user_id"] 
+    del session["user_role"]
 
 def get_user_id():
     return session.get("user_id", 0)
@@ -76,4 +78,8 @@ def find_user_id(user_id):
 
 def check_csrf():
     if session["csrf_token"] != request.form["csrf_token"]:
+        abort(403)
+
+def check_role(role):
+    if role > session.get("user_role", 0):
         abort(403)
