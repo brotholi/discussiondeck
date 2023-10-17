@@ -18,7 +18,7 @@ Discussiondeck-sovellus on keskustelualusta, jossa käyttäjät voivat aloittaa 
 - Keskusteluketjuun voi lisätä tunnisteen tai niin sanotun tagin
 - Sovelluksessa on hakutoiminto, jolla voi hakea ketjuja. Hakutoiminto etsii ketjuja, joissa on hakusanaa vastaava sana
 - Ketjun perustanut käyttäjä voi poistaa ketjun. Muut tavalliset käyttäjät eivät voi poistaa ketjua.
--Pääkäyttäjä voi poistaa minkä tahansa keskusteluketjun
+- Pääkäyttäjä voi poistaa minkä tahansa keskusteluketjun
 
 ### TODO:
 - virheilmoitusten siistiminen
