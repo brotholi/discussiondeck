@@ -89,15 +89,16 @@ def show_discussions():
         all_discussions = discussions.get_discussions()
         return render_template("discussions.html", discussions=all_discussions)
 
-@app.route("/discussions/<int:discussion_id>")
+@app.route("/discussions/<int:discussion_id>", methods=["GET"])
 def show_discussion(discussion_id):
-    discussion_information = decks.get_discussion_deck(discussion_id)
-    discussion_comments = decks.get_comments(discussion_id)
-    if len(discussion_comments) <= 5:
-        deck_comments = discussion_comments
-    else:
-        deck_comments = discussion_comments[:5]
-    return render_template("deck.html", discussion_information=discussion_information, comments=deck_comments)
+    if request.method == "GET":
+        discussion_information = decks.get_discussion_deck(discussion_id)
+        discussion_comments = decks.get_comments(discussion_id)
+        if len(discussion_comments) <= 5:
+            deck_comments = discussion_comments
+        else:
+            deck_comments = discussion_comments[:5]
+        return render_template("deck.html", discussion_information=discussion_information, comments=deck_comments)
 
 @app.route("/discussions/<int:discussion_id>/like", methods=["POST"])
 def like(discussion_id):
@@ -143,3 +144,16 @@ def tags():
             extras.create_tag(tag, id)
             discussion_tags = extras.get_discussion_tags(id)
             return render_template("tags.html", tags = discussion_tags)
+        
+@app.route("/discussions/<int:discussion_id>/delete", methods=["POST", "GET"])
+def delete(discussion_id):
+    if request.method == "GET":
+        return render_template("delete.html",discussion_id=discussion_id)
+    
+    if request.method == "POST":
+        users.check_csrf()
+        user_id = users.get_user_id()
+        if not discussions.remove_discussion(discussion_id, user_id):
+            return render_template("error.html", 
+                                   message="Viestin poistaminen ei onnistunut")
+        return redirect(url_for("show_discussions"))

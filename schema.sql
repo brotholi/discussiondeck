@@ -16,7 +16,8 @@ CREATE TABLE discussions (
 	topic TEXT, 
 	created TIMESTAMP,
 	likes INTEGER,
-	content TEXT
+	content TEXT,
+	visible INTEGER
 );
 
 CREATE TABLE comments (
