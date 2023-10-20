@@ -4,26 +4,23 @@ Discussiondeck-sovellus on keskustelualusta, jossa käyttäjät voivat aloittaa 
 
 
 ## Ominaisuudet
-#### Kirjautuminen
+
 - Sovellukseen voi luoda käyttäjätunnuksen. Käyttäjätunnus vaatii salasanan.
 - Käyttäjät voivat kirjautua sovellukseen.
 - Sovelluksessa kahdenlaisia käyttäjiä, ylläpitäjiä ja tavallisia käyttäjiä.
-
-#### Keskustelut
 - Käyttäjät voivat aloittaa uuden keskusteluketjun ja antaa sille otsikon. Ketjulle annetaan myös sisältö.
-- Etusivulla käyttäjät näkevät keskusteluketjuja. Jokaisesta ketjusta näkee otsikon, aloituspäivän sekä tykkäysten määrän.
-- Jokaisesta ketjusta näkee uudessa ikkunassa myös sisällön, aloittajan nimen ja kommentit.
-- Käyttäjät voivat tykätä ketjusta. Ketjusta voi tykätä vain kerran
+- Keskusteluketjuun voi lisätä tunnisteen tai niin sanotun tagin perustamisvaiheessa.
+- Kirjautuneet käyttäjät voivat tykätä ketjusta. Ketjusta voi tykätä vain kerran.
 - Käyttäjät voivat lisätä ketjuun kommentteja.
-- Keskusteluketjuun voi lisätä tunnisteen tai niin sanotun tagin
-- Sovelluksessa on hakutoiminto, jolla voi hakea ketjuja. Hakutoiminto etsii ketjuja, joiden nimessä tai tagissa on vastaava sana.
+- Etusivulla näkyy kerrallaan yksi aktiivisista mainoksista. Mainoksen taso määrittää sen, kuinka suurella todennäköisyydellä mainos näytetään.
+- Jos mainoksia ei ole lisätty jollekin tasolle, ei todennäköisyys muutu eikä mainoksia näytetä, jos niitä ei ole. 
+- Sovelluksessa on hakutoiminto, jolla voi hakea ketjuja. Hakutoiminto etsii ketjuja, joiden otsikossa, sisällössä tai tagissa on vastaava sana.
 - Ketjun perustanut käyttäjä voi poistaa ketjun. Muut tavalliset käyttäjät eivät voi poistaa ketjua.
 - Ylläpitäjä voi poistaa minkä tahansa keskusteluketjun
 - Ylläpitäjä voi lisätä sovellukseen mainoksia ja aktivoida niitä. Kolme mainosta voi olla kerrallaan aktiivisina. 
 
 ### TODO:
 - virheilmoitusten siistiminen
-- Etusivulla näkyy kerrallaan yksi aktiivisista mainoksista. Mainoksen taso määrittää sen, kuinka suurella todennäköisyydellä mainos näytetään.
 
 ## Käynnistysohjeet:
 Ennen käynnistystä asenna PostgreSQL kurssin ohjeiden mukaisesti ja käynnistä tietokanta komennolla start-pg.sh
