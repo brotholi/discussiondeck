@@ -175,17 +175,16 @@ def new_advertisment():
         users.check_csrf()
         advertiser = request.form["advertiser"]
         content = request.form["content"]
-        level = request.form["level"]
-
         if len(advertiser) == 0:
             return render_template("error.html", 
                                    message="Mainostajan nimi ei voi olla tyhjä")
         if len(content) == 0:
             return render_template("error.html", 
                                    message="Mainoksen sisältö ei voi olla tyhjä")
-        if len(level) == 0:
+        if "level" not in request.form:
             return render_template("error.html", 
-                                   message="Valitse mainokselle joku taso")
+                                   message="Valitse mainoksen taso")
+        level = request.form["level"]
         if not ads.create_ad(advertiser, content, level):
             return render_template("error.html", 
                                    message="Mainoksen luominen ei onnistunut")

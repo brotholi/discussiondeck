@@ -32,7 +32,7 @@
 {% endif %}
 <b>{{ comment.username }} </b> <br>
 {{ comment.created.strftime("%d.%m.%Y klo %H:%M") }} <br>
-{{ comment.comment }} </p>
+<i>{{ comment.comment }} </i></p>
 {% endfor %} 
 <br>
 <form action="/discussions/{{ discussion_information[0].id }}/all_comments" method="GET">    
