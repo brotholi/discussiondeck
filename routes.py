@@ -10,7 +10,9 @@ import ads
 def index():
     all_discussions = discussions.get_discussions()
     all_users = users.get_all_users()
-    return render_template("index.html", discussions=all_discussions, all_users=all_users)
+    ad = ads.show_ad()
+    print(ad)
+    return render_template("index.html", discussions=all_discussions, all_users=all_users, ad=ad)
 
 @app.route("/loginpage", methods=["GET", "POST"])
 def loginpage():

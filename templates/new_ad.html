@@ -16,8 +16,8 @@
 <form action="/new_ad" method="POST">
     <label for="text">Mainostajan nimi: (max 20 merkkiä)</label><br><br>
     <textarea id="text" name="advertiser" rows="2" cols="50" maxlength="20"></textarea><br><br>
-    <label for="textbox">Mainosteksti: (max 150 merkkiä) </label><br><br>
-    <textarea id="textbox" name="content" rows="8" cols="50" maxlength="150"></textarea><br><br>
+    <label for="textbox">Mainosteksti: (10-150 merkkiä) </label><br><br>
+    <textarea id="textbox" name="content" rows="8" cols="50" minlength="10" maxlength="150"></textarea><br><br>
     <input type="submit" class="rightbutton" value="Lisää mainos">
     <label for="level">Valitse mainoksen taso:</label><br><br>
     <input type="radio" name="level" value="1"> 1. taso

@@ -19,8 +19,8 @@ def get_active_ad_by_level(level):
     sql= "SELECT id, advertiser, content, status, level, created, moderator_id FROM ads WHERE status=1 AND level=:level"
     result = db.session.execute(text(sql), {"level":level})
     ad = result.fetchone()
-    if not ad:
-        return []
+    # if not ad:
+    #     return []
     return ad
 
 def show_ad():
@@ -29,6 +29,8 @@ def show_ad():
     sql= "SELECT id, advertiser, content, status, level, created, moderator_id FROM ads WHERE status=1 AND level=:shown_level"
     result = db.session.execute(text(sql), {"shown_level":shown})
     ad = result.fetchone()
+    if not ad:
+        return []
     return ad
 
 def create_ad(arvertiser, content, level):
@@ -40,7 +42,7 @@ def create_ad(arvertiser, content, level):
 
 def activate_ad(level, ad_id):
     deactivated_ad = get_active_ad_by_level(level)
-    if len(deactivated_ad) > 0:
+    if deactivated_ad:
         if not deactivate_ad(deactivated_ad[0]):
             return False
     sql = "UPDATE ads SET status=1 WHERE id=:ad_id"

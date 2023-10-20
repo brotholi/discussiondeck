@@ -123,3 +123,17 @@ textarea {
   button.right {
     float: right;
   }
+
+  .adtext {
+    font-size: large;
+    font-family: Arial, Helvetica, sans-serif;
+    font-weight: 200;
+    display: inline; 
+    display: inline-block;
+    background-color: #f9bbff;
+    color: black;
+    margin: 25px; 
+    align-items: center;
+    padding: 15px;
+
+  }
