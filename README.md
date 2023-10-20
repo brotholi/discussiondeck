@@ -16,17 +16,15 @@ Discussiondeck-sovellus on keskustelualusta, jossa käyttäjät voivat aloittaa 
 - Käyttäjät voivat tykätä ketjusta. Ketjusta voi tykätä vain kerran
 - Käyttäjät voivat lisätä ketjuun kommentteja.
 - Keskusteluketjuun voi lisätä tunnisteen tai niin sanotun tagin
-- Sovelluksessa on hakutoiminto, jolla voi hakea ketjuja. Hakutoiminto etsii ketjuja, joissa on hakusanaa vastaava sana
+- Sovelluksessa on hakutoiminto, jolla voi hakea ketjuja. Hakutoiminto etsii ketjuja, joiden nimessä tai tagissa on vastaava sana.
 - Ketjun perustanut käyttäjä voi poistaa ketjun. Muut tavalliset käyttäjät eivät voi poistaa ketjua.
-- Pääkäyttäjä voi poistaa minkä tahansa keskusteluketjun
+- Ylläpitäjä voi poistaa minkä tahansa keskusteluketjun
+- Ylläpitäjä voi lisätä sovellukseen mainoksia ja aktivoida niitä. Kolme mainosta voi olla kerrallaan aktiivisina. 
 
 ### TODO:
 - virheilmoitusten siistiminen
 - ulkoasun viimeistely
-- Pääkäyttäjä voi poistaa minkä tahansa kommentin tai käyttäjän sovelluksesta
-- Haku tunnisteen eli tagin perusteella
-- Pääkäyttäjä voi lisätä sovellukseen mainoksia.
-- Etusivulla näkyy kerrallaan yksi mainos. Mainoksen taso määrittää sen, kuinka suurella todennäköisyydellä mainos näytetään.
+- Etusivulla näkyy kerrallaan yksi aktiivisista mainoksista. Mainoksen taso määrittää sen, kuinka suurella todennäköisyydellä mainos näytetään.
 
 ## Käynnistysohjeet:
 Ennen käynnistystä asenna PostgreSQL kurssin ohjeiden mukaisesti ja käynnistä tietokanta komennolla start-pg.sh
