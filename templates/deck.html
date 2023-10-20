@@ -16,6 +16,7 @@
 <p class="background_text"> Tykkäyksiä: {{ discussion_information[0].likes}} </p>
     <form action="/discussions/{{ discussion_information[0].id }}/like" method="POST">
     <button> <img src="{{ url_for('static', filename='images/like-button.png') }}" width="30" height="30" /> </button>
+    <input type="hidden" name="csrf_token" value="{{ session.csrf_token }}">
 </form>
 <hr>
 <h3>Kommentit</h3>

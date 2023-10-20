@@ -102,9 +102,11 @@ def show_discussion(discussion_id):
 
 @app.route("/discussions/<int:discussion_id>/like", methods=["POST"])
 def like(discussion_id):
-    if not decks.like(discussion_id):
+    users.check_csrf()
+    user_id = users.get_user_id()
+    if not decks.like(user_id, discussion_id):
         return render_template("error.html", 
-                               message="Tykkäys ei onnistunut")
+                               message="Olet jo tykännyt keskustelusta")
     return redirect(url_for('show_discussion',discussion_id = discussion_id))
 
 @app.route("/discussions/<int:discussion_id>/all_comments", methods=["GET", "POST"])

@@ -15,14 +15,15 @@ def get_comments(discussion_id):
     comments = result.fetchall()
     return comments
 
-def like(discussion_id):
-    try:
+def like(user_id, discussion_id):
+    if users.find_user_likes(user_id, discussion_id) == 0:
         sql = "UPDATE discussions SET likes = likes + 1 WHERE id=:discussion_id"
         db.session.execute(text(sql), {"discussion_id":discussion_id})
+        sql = "INSERT INTO likes (user_id, discussion_id) VALUES (:user_id, :discussion_id)"
+        db.session.execute(text(sql), {"user_id":user_id, "discussion_id":discussion_id})
         db.session.commit()
         return True
-    except:
-        return False
+    return False
     
 def comment(discussion_id, content):
     #TODO tee tarkistus, että käyttäjä on kirjautunut paremmaksi

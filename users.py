@@ -79,3 +79,9 @@ def find_user_id(user_id):
 def check_role(role):
     if role > session.get("user_role", 0):
         abort(403)
+
+def find_user_likes(user_id, discussion_id):
+    sql = "SELECT COUNT(*) FROM likes WHERE user_id=:user_id AND discussion_id=:discussion_id"
+    result = db.session.execute(text(sql), {"user_id":user_id, "discussion_id":discussion_id})
+    likes = result.fetchone()[0]
+    return likes
