@@ -23,7 +23,6 @@ Discussiondeck-sovellus on keskustelualusta, jossa käyttäjät voivat aloittaa 
 
 ### TODO:
 - virheilmoitusten siistiminen
-- ulkoasun viimeistely
 - Etusivulla näkyy kerrallaan yksi aktiivisista mainoksista. Mainoksen taso määrittää sen, kuinka suurella todennäköisyydellä mainos näytetään.
 
 ## Käynnistysohjeet:
