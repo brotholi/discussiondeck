@@ -11,7 +11,6 @@ def index():
     all_discussions = discussions.get_discussions()
     all_users = users.get_all_users()
     ad = ads.show_ad()
-    print(ad)
     return render_template("index.html", discussions=all_discussions, all_users=all_users, ad=ad)
 
 @app.route("/loginpage", methods=["GET", "POST"])
@@ -64,8 +63,7 @@ def register():
 def result():
     query = request.args["query"]
     result = discussions.find_discussions_by_keyword(query)
-    print(result)
-    return render_template("result.html", discussions=result)
+    return render_template("result.html", result=result)
 
 @app.route("/create", methods=["GET", "POST"])
 def create():
@@ -204,7 +202,6 @@ def activate_ad(ad_id):
         ad_information = ads.get_ad_information(ad_id)
         level = ad_information[4]
         now_active = ads.get_active_ad_by_level(level)
-        print(now_active)
         return render_template("activate.html", ad_id=ad_id, ad_information=ad_information, now_active=now_active)
     if request.method == "POST":
         users.check_csrf()

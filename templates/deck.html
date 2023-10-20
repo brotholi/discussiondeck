@@ -40,10 +40,10 @@
 {% else %}
 <p class="commentbody">
 {% endif %}
-<b>{{ comment.username }} </b>
-<p class="background_text"> {{ comment.created.strftime("%d.%m.%Y klo %H:%M") }} </p>
-<br>{{ comment.comment }}<br>
-{% endfor %} 
+<b>{{ comment.username }} </b><br>
+{{ comment.created.strftime("%d.%m.%Y klo %H:%M") }}<br>
+{{ comment.comment }} </p>
+{% endfor %}
 <br>
 <form action="/discussions/{{ discussion_information[0].id }}/all_comments" method="GET">    
     <input type="submit" class="rightbutton" value="Kommentoi">
