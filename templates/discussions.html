@@ -4,9 +4,9 @@
 <a href="/create">Aloita keskustelu</a></li>
 <h2> Keskustelut </h2>
 {% for discussion in discussions %}
-<a href="/discussions/{{ discussion.id }}">{{ discussion.topic }}</a> <br>
+<b><a href="/discussions/{{ discussion.id }}">{{ discussion.topic }}</a> </b><br>
 Aloittanut: {{ discussion.username }} <br>
-Luotu: {{ discussion.created.strftime("%Y-%m-%d %H:%M:%S") }} <br>
+Luotu: {{ discussion.created.strftime("%d.%m.%Y klo %H:%M") }} <br>
 Tykkäyksiä: {{ discussion.likes}} <br>
 <hr>
 {% endfor %}

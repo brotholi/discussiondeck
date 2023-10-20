@@ -1,16 +1,15 @@
 {% extends "layout.html" %}
 {% block title %} Hakutulos {% endblock %}
 {% block content %}
-{% if discussions %}
+{% if not discussions %}
+<p class="background_text">Ei hakutuloksia</p>
+{% else %}
 {% for discussion in discussions %}
-<a href="/discussions/{{ discussion.id }}">{{ discussion.topic }}</a> <br>
-Aloittanut: {{ discussion.username }} <br>
-Luotu: {{ discussion.created.strftime("%Y-%m-%d %H:%M:%S") }} <br>
+<b><a href="/discussions/{{ discussion.id }}">{{ discussion.topic }}</a> </b><br>
+Luotu: {{ discussion.created.strftime("%d.%m.%Y klo %H:%M")  }} <br>
 Tykkäyksiä: {{ discussion.likes}} <br>
 <hr>
 {% endfor %}
-{% else %}
-<p class="background_text">Ei hakutuloksia</p>
 {% endif %}
 <br>
 <form action="/result" method="GET">

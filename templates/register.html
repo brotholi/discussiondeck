@@ -2,6 +2,10 @@
 {% block title %} Rekisteröityminen {% endblock %}
 {% block content %}
 <h2> Rekisteröityminen </h2>
+{% if session.username %}
+<p>Kirjaudu ulos ennen rekisteröitymistä</p><br>
+<a href="/logout">Kirjaudu ulos</a><br>
+{% else %}
 <form action="/register" method="POST">
     <p>Anna käyttäjätunnus:<br>
     <input type="text" name="username"></p>
@@ -19,4 +23,5 @@
     <p>Huom! Käyttäjätunnuksen on oltava vähintään 3 merkkiä pitkä<br>
         <input type="submit" class="button" value="Luo käyttäjä">
 </form>
+{% endif %}
 {% endblock %}

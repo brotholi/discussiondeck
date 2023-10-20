@@ -13,10 +13,12 @@
 <b>Luotu:</b> {{ discussion_information[0].created.strftime("%d.%m.%Y klo %H:%M") }} <br>
 <p class="textbody">{{ discussion_information[0].content }}</p>
 <p class="background_text"> Tykkäyksiä: {{ discussion_information[0].likes}} </p>
+{% if session.username %}
     <form action="/discussions/{{ discussion_information[0].id }}/like" method="POST">
     <button> <img src="{{ url_for('static', filename='images/like-button.png') }}" width="30" height="30" /> </button>
     <input type="hidden" name="csrf_token" value="{{ session.csrf_token }}">
 </form>
+{% endif %}
 <hr>
 <h3>Kommentit</h3>
 {% if not comments %}

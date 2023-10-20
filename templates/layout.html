@@ -10,7 +10,11 @@
         <ul>
             <li><a href="/">Etusivu</a></li>
             <li><a href="/discussions">Keskustele</a></li>
+            {% if not session.username %}
             <li><a href="/loginpage">Kirjaudu</a></li>
+            {% else %}
+            <li><a href="/logout">Kirjaudu ulos</a></li>
+            {% endif %}
             <li><a href="/register">Rekisteröidy</a></li>
             {% if session.user_role == 2 %}
             <li><a href="/ads">Mainokset</a></li>

@@ -20,9 +20,9 @@
   </form>
 <h3>Uusimmat keskustelut</h3>
 {% for discussion in discussions %} <br>
-{{ discussion.topic }} <br>
+<b><a href="/discussions/{{ discussion.id }}">{{ discussion.topic }}</a> </b><br>
 Aloittanut: {{ discussion.username }} <br>
-Luotu: {{ discussion.created.strftime("%Y-%m-%d %H:%M:%S") }} <br>
+Luotu: {{ discussion.created.strftime("%d.%m.%Y klo %H:%M") }} <br>
 Tykkäyksiä: {{ discussion.likes}} <br>
 <hr>
 {% endfor %}

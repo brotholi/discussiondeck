@@ -10,7 +10,6 @@
 <b>Tila:</b> Ei aktiivinen<br>
 {% endif %}
 {% if ad_information.status == 0 %}
-{% if session.user_id == ad_information.moderator_id%}
 <div>
 <form action="/ads/{{ ad_information.id }}/activate" method="GET">
     <input type="submit" class="rightbutton" value="Aktivoi mainos">
@@ -18,6 +17,14 @@
 </div>
 <br>
 {% endif %}
+{% if ad_information.status == 1 %}
+<div>
+    <form action="/ads/{{ ad_information.id }}/deactivate" method="POST">
+        <input type="submit" class="rightbutton" value="Muuta ei-aktiiviseksi">
+        <input type="hidden" name="csrf_token" value="{{ session.csrf_token }}">
+    </form>
+    </div>
+    <br>
 {% endif %}
 <p class="textbody">{{ ad_information.content }}</p>
 <br><br>

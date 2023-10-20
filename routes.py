@@ -62,7 +62,7 @@ def register():
 def result():
     query = request.args["query"]
     result = discussions.find_discussions_by_keyword(query)
-
+    print(result)
     return render_template("result.html", discussions=result)
 
 @app.route("/create", methods=["GET", "POST"])
@@ -211,3 +211,11 @@ def activate_ad(ad_id):
             return render_template("error.html", 
                                 message="Mainoksen aktivointi ei onnistunut")
         return redirect(url_for("advertisments"))
+
+@app.route("/ads/<int:ad_id>/deactivate", methods=["POST"])
+def deactivate_ad(ad_id):
+    users.check_csrf()
+    if not ads.deactivate_ad(ad_id):
+        return render_template("error.html", 
+                                message="Mainoksen deaktivointi ei onnistunut")
+    return redirect(url_for("advertisments"))

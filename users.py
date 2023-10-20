@@ -26,6 +26,7 @@ def login(username, password):
     session["username"] = username
     session["user_role"] = user[2]
     session["csrf_token"] = secrets.token_hex(16)
+    session.permanent = True
     return_values = [True]
     return return_values
 
@@ -44,6 +45,8 @@ def logout():
     del session["username"]
     del session["user_id"] 
     del session["user_role"]
+    del session["csrf_token"]
+    session.permanent = False
 
 def get_user_id():
     return session.get("user_id", 0)
