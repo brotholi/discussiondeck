@@ -94,12 +94,13 @@ def show_discussions():
 def show_discussion(discussion_id):
     if request.method == "GET":
         discussion_information = decks.get_discussion_deck(discussion_id)
+        discussion_tags = tags.get_discussion_tags(discussion_id)
         discussion_comments = decks.get_comments(discussion_id)
         if len(discussion_comments) <= 5:
             deck_comments = discussion_comments
         else:
             deck_comments = discussion_comments[:5]
-        return render_template("deck.html", discussion_information=discussion_information, comments=deck_comments)
+        return render_template("deck.html", discussion_information=discussion_information, discussion_tags=discussion_tags, comments=deck_comments)
 
 @app.route("/discussions/<int:discussion_id>/like", methods=["POST"])
 def like(discussion_id):

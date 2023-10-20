@@ -10,7 +10,7 @@ def get_all_ads():
     return ads
 
 def get_active_ads():
-    sql= "SELECT id, advertiser, content, status, level, created, moderator_id FROM ads WHERE status=1 ORDER BY LEVEL DESC"
+    sql= "SELECT id, advertiser, content, status, level, created, moderator_id FROM ads WHERE status=1 ORDER BY LEVEL"
     result = db.session.execute(text(sql))
     ads = result.fetchall()
     return ads

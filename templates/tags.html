@@ -16,7 +16,7 @@ Tunniste: <input type="text" name="tag">
 </form>
 {% if tags %}
 {% for tag in tags %}
-{{ tag.tag }}
+<p class="lila_background_text" >#{{ tag.tag }}</p>
 {% endfor %}
 {% endif %}
 <br>

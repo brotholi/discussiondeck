@@ -11,18 +11,28 @@
 {% endif %}
 <b>Keskustelun aloitti:</b> {{ discussion_information[1] }} <br>
 <b>Luotu:</b> {{ discussion_information[0].created.strftime("%d.%m.%Y klo %H:%M") }} <br>
-<p class="textbody">{{ discussion_information[0].content }}</p>
-<p class="background_text"> Tykkäyksiä: {{ discussion_information[0].likes}} </p>
+<p class="indent">{{ discussion_information[0].content }}</p>
 {% if session.username %}
+<div style="float:right;">
     <form action="/discussions/{{ discussion_information[0].id }}/like" method="POST">
-    <button> <img src="{{ url_for('static', filename='images/like-button.png') }}" width="30" height="30" /> </button>
+    <button> <img src="{{ url_for('static', filename='images/like-button.png') }}" width="40" height="40"> </button>
     <input type="hidden" name="csrf_token" value="{{ session.csrf_token }}">
-</form>
+</form><br><br>
+</div>
 {% endif %}
-<hr>
+<br><br><br><br><br>
+<p class="background_text"> Tykkäyksiä: {{ discussion_information[0].likes}} </p>
+{% if discussion_tags %}
+<div style="float:right;">
+{% for tag in discussion_tags %}
+<p class="lila_background_text" >#{{ tag.tag }}</p>
+{% endfor %}
+</div>
+{% endif %}
+<br><br><hr>
 <h3>Kommentit</h3>
 {% if not comments %}
-<p class="background_text"> Ei kommentteja </p>
+<p class="background_text"> Ei kommentteja </p><br>
 {% endif %}
 {% for comment in comments %}
 {% if comment.id % 2 == 0 %}
@@ -30,9 +40,9 @@
 {% else %}
 <p class="commentbody">
 {% endif %}
-<b>{{ comment.username }} </b> <br>
-{{ comment.created.strftime("%d.%m.%Y klo %H:%M") }} <br>
-<i>{{ comment.comment }} </i></p>
+<b>{{ comment.username }} </b>
+<p class="background_text"> {{ comment.created.strftime("%d.%m.%Y klo %H:%M") }} </p>
+<br>{{ comment.comment }}<br>
 {% endfor %} 
 <br>
 <form action="/discussions/{{ discussion_information[0].id }}/all_comments" method="GET">    

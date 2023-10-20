@@ -86,7 +86,14 @@ textarea {
 
   .background_text {
     color: rgb(99, 99, 99);
+    display: inline;
   }
+
+  .lila_background_text {
+    color: #ab00ba;
+    display: inline;
+  }
+
 
   .graycommentbody {
     background-color: lightgrey;
@@ -109,8 +116,10 @@ textarea {
 
   }
 
-
   p.indent {
-    text-indent: 30px;
+    margin: 30px;
   }
   
+  button.right {
+    float: right;
+  }

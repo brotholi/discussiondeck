@@ -19,7 +19,7 @@
   <input type="submit" class="small_button" value="Hae">
   </form>
 <h3>Uusimmat keskustelut</h3>
-{% for discussion in discussions %} <br>
+{% for discussion in discussions %}
 <b><a href="/discussions/{{ discussion.id }}">{{ discussion.topic }}</a> </b><br>
 Aloittanut: {{ discussion.username }} <br>
 Luotu: {{ discussion.created.strftime("%d.%m.%Y klo %H:%M") }} <br>

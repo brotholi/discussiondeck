@@ -7,21 +7,16 @@
     <input type="submit" class="small_button" value="Lisää uusi mainos">
 </form>
 <br>
-<hr>
 <h3> Aktiiviset mainokset </h3>
 {% if not active_ads %}
-<p class="background_text"> Ei aktiivisia mainoksia </p>
+<p class="background_text"> Ei aktiivisia mainoksia </p><br>
 {% endif %}
 {% for ad in active_ads %}
-<a href="/ads/{{ ad.id }}">{{ ad.advertiser }}</a> <br>
-{{ ad.status }}
-{{ ad.level }}
-{{ad.created.strftime("%Y-%m-%d %H:%M:%S")}}
+<p class="indent"><b> Taso {{ ad.level }}: </b><a href="/ads/{{ ad.id }}">{{ ad.advertiser }} </a></p>
 {% endfor %}
-<hr>
 <h3> Kaikki mainokset</h3>
 {% if not all_ads %}
-<p class="background_text"> Ei mainoksia </p>
+<p class="background_text"> Ei mainoksia </p><br>
 {% endif %}
 {% for ad in all_ads %}
 <b><a href="/ads/{{ ad.id }}">{{ ad.advertiser }}</a></b><br>
