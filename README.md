@@ -13,6 +13,8 @@ Discussiondeck-sovellus on keskustelualusta, jossa käyttäjät voivat aloittaa 
 - Käyttäjät voivat aloittaa uuden keskusteluketjun ja antaa sille otsikon. Ketjulle annetaan myös sisältö.
 - Etusivulla käyttäjät näkevät keskusteluketjuja. Jokaisesta ketjusta näkee otsikon, aloituspäivän sekä tykkäysten määrän.
 - Jokaisesta ketjusta näkee uudessa ikkunassa myös sisällön, aloittajan nimen ja kommentit.
+- - Etusivulla näkyy kerrallaan yksi aktiivisista mainoksista. Mainoksen taso määrittää sen, kuinka suurella todennäköisyydellä mainos näytetään.
+- Jos mainoksia ei ole lisätty jollekin tasolle, ei todennäköisyys muutu eikä mainoksia näytetä, jos niitä ei ole. 
 - Käyttäjät voivat tykätä ketjusta. Ketjusta voi tykätä vain kerran
 - Käyttäjät voivat lisätä ketjuun kommentteja.
 - Keskusteluketjuun voi lisätä tunnisteen tai niin sanotun tagin
@@ -23,7 +25,6 @@ Discussiondeck-sovellus on keskustelualusta, jossa käyttäjät voivat aloittaa 
 
 ### TODO:
 - virheilmoitusten siistiminen
-- Etusivulla näkyy kerrallaan yksi aktiivisista mainoksista. Mainoksen taso määrittää sen, kuinka suurella todennäköisyydellä mainos näytetään.
 
 ## Käynnistysohjeet:
 Ennen käynnistystä asenna PostgreSQL kurssin ohjeiden mukaisesti ja käynnistä tietokanta komennolla start-pg.sh
