@@ -1,0 +1,37 @@
+{% extends "layout.html" %}
+{% block title %} Mainosten ylläpito {% endblock %}
+{% block content %}
+<h2> Mainosten ylläpito </h2>
+<br>
+<form action="/new_ad" method="GET">
+    <input type="submit" class="small_button" value="Lisää uusi mainos">
+</form>
+<br>
+<hr>
+<h3> Aktiiviset mainokset </h3>
+{% if not active_ads %}
+<p class="background_text"> Ei aktiivisia mainoksia </p>
+{% endif %}
+{% for ad in active_ads %}
+<a href="/ads/{{ ad.id }}">{{ ad.advertiser }}</a> <br>
+{{ ad.status }}
+{{ ad.level }}
+{{ad.created.strftime("%Y-%m-%d %H:%M:%S")}}
+{% endfor %}
+<hr>
+<h3> Kaikki mainokset</h3>
+{% if not all_ads %}
+<p class="background_text"> Ei mainoksia </p>
+{% endif %}
+{% for ad in all_ads %}
+<b><a href="/ads/{{ ad.id }}">{{ ad.advertiser }}</a></b><br>
+{% if ad.status == 1 %}
+Aktiivinen<br>
+{% else %}
+Ei aktiivinen<br>
+{% endif %}
+Taso: {{ ad.level }}<br>
+Luotu: {{ad.created.strftime("%d.%m.%Y klo %H:%M")}} <br>
+<hr>
+{% endfor %}
+{% endblock %}

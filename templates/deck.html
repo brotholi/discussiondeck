@@ -1,11 +1,10 @@
 {% extends "layout.html" %}
 {% block content %}
-
 <h2> {{ discussion_information[0].topic}} </h2>
 {% if session.username ==  discussion_information[1] or session.user_role == 2%}
 <div>
 <form action="/discussions/{{ discussion_information[0].id }}/delete" method="GET">
-    <input type="submit" class="button" value="Poista keskustelu">
+    <input type="submit" class="rightbutton" value="Poista keskustelu">
 </form>
 </div>
 <br>
@@ -25,17 +24,18 @@
 {% endif %}
 {% for comment in comments %}
 {% if comment.id % 2 == 0 %}
-<p class="commentbody">
-{% else %}
 <p class="graycommentbody">
+{% else %}
+<p class="commentbody">
 {% endif %}
 <b>{{ comment.username }} </b> <br>
-{{ comment.comment }} <br>
-{{ comment.created.strftime("%d.%m.%Y klo %H:%M") }}</p>
+{{ comment.created.strftime("%d.%m.%Y klo %H:%M") }} <br>
+{{ comment.comment }} </p>
 {% endfor %} 
 <br>
 <form action="/discussions/{{ discussion_information[0].id }}/all_comments" method="GET">    
-    <input type="submit" class="button" value="Kommentoi">
+    <input type="submit" class="rightbutton" value="Kommentoi">
 </form>
+<br><br>
 {% endblock %}
 

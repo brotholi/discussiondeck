@@ -1,0 +1,28 @@
+{% extends "layout.html" %}
+{% block title %} Lisää mainos {% endblock %}
+{% block content %}
+<h2> Lisää uusi mainos </h2>
+<p>Lisää uusi mainos Discussiondeck-alustalle. Voit valita mainokselle joko tason 1, 2 tai 3. Mainoksia näytetään etusivulla. </p>
+<br>    
+<b>Tasot määräytyvät seuraavasti:<br></b>
+<p class="indent"> - Tason 1 mainos näytetään 50 % todennäköisyydellä </p>
+<p class="indent"> - Tason 2 mainos näytetään 35 % todennäköisyydellä </p>
+<p class="indent"> - Tason 3 mainos näytetään 15 % todennäköisyydellä </p>
+<p> Voit valita vain yhden tason mainokselle. <br>
+    Mainos näkyy etusivulla vasta kun se aktivoidaan. <br>
+    Discussiondeck-alustalla voi olla aktiivisena vain 3 mainosta kerrallaan.<br>
+</p>
+<b>Luo uusi mainos</b><br><br>
+<form action="/new_ad" method="POST">
+    <label for="text">Mainostajan nimi: (max 20 merkkiä)</label><br><br>
+    <textarea id="text" name="advertiser" rows="2" cols="50" maxlength="20"></textarea><br><br>
+    <label for="textbox">Mainosteksti: (max 150 merkkiä) </label><br><br>
+    <textarea id="textbox" name="content" rows="8" cols="50" maxlength="150"></textarea><br><br>
+    <input type="submit" class="rightbutton" value="Lisää mainos">
+    <label for="level">Valitse mainoksen taso:</label><br><br>
+    <input type="radio" name="level" value="1"> 1. taso
+    <input type="radio" name="level" value="2"> 2. taso
+    <input type="radio" name="level" value="3"> 3. taso           
+    <input type="hidden" name="csrf_token" value="{{ session.csrf_token }}">
+</form>
+{% endblock %}

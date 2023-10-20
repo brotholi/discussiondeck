@@ -1,5 +1,4 @@
 from sqlalchemy.sql import text
-from flask import session
 from db import db
 
 def create_tag(tag, discussion_id):

@@ -10,13 +10,14 @@
     <input type="submit" class="button" value="Poista keskustelu">
     <input type="hidden" name="csrf_token" value="{{ session.csrf_token }}">
 </form> 
-</form>
 </div>
 <div style="float:right;">
 <form action="/discussions/{{ discussion_id }}" method="GET">
     <input type="submit" class="button" value="Peruuta">
 </form>
 </div>
-    
+<br>
+<br>
+<br>
 {% endblock %}
     

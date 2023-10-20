@@ -1,0 +1,48 @@
+{% extends "layout.html" %}
+{% block content %}
+
+<h2> Aktivoi mainos </h2>
+<p>Haluatko varmasti aktivoida mainoksen? </p> 
+<p> Tällä hetkellä aktiivinen, tason {{ ad_information.level }} mainos asetetaan ei-aktiiviseksi.</p>
+<br>
+<hr>
+<h3>Tämä mainos aktivoidaan:</h3>
+<u><h4> Mainoksen tiedot </h4></u>
+<b>Mainostaja:</b> {{ ad_information.advertiser }} <br>
+<b>Luotu:</b> {{ ad_information.created.strftime("%d.%m.%Y klo %H:%M") }} <br>
+<b>Taso:</b> {{ ad_information.level }}<br>
+{% if ad_information.status == 1 %}
+<b>Tila:</b> Aktiivinen<br>
+{% else %}
+<b>Tila:</b> Ei aktiivinen<br>
+{% endif %}
+<hr>
+{% if now_active %}
+<h3>Tämä mainos muutetaan ei-aktiiviseksi:</h3>
+<u><h4> Mainoksen tiedot </h4></u>
+<b>Mainostaja:</b> {{ now_active.advertiser }} <br>
+<b>Luotu:</b> {{ now_active.created.strftime("%d.%m.%Y klo %H:%M") }} <br>
+<b>Taso:</b> {{ now_active.level }}<br>
+{% if now_active.status == 1 %}
+<b>Tila:</b> Aktiivinen<br>
+{% else %}
+<b>Tila:</b> Ei aktiivinen<br>
+{% endif %}
+{% endif %}
+<br>
+<div style="float:left;">
+<form action="/ads/{{ ad_id }}" method="GET">
+    <input type="submit" class="button" value="Peruuta">
+</form>
+</div>
+<div style="float:right;">
+<form action="/ads/{{ ad_id }}/activate" method="POST">
+    <input type="submit" class="button" value="Aktivoi mainos">
+    <input type="hidden" name="csrf_token" value="{{ session.csrf_token }}">
+</form> 
+</div>
+<br>
+<br>
+<br>
+{% endblock %}
+    

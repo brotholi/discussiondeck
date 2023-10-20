@@ -3,7 +3,8 @@ from flask import redirect, render_template, request, url_for, session
 import discussions
 import users
 import decks
-import extras
+import tags
+import ads
 
 @app.route("/")
 def index():
@@ -128,7 +129,7 @@ def comment(discussion_id):
     
 
 @app.route("/tags", methods=["GET", "POST"])
-def tags():
+def discussion_tags():
     if request.method == "GET":
         return render_template("tags.html", discussion_tags=[])
     if request.method == "POST":
@@ -140,11 +141,11 @@ def tags():
         all_discussions = discussions.get_discussions()
         newest_discussion = all_discussions[0]
         id = newest_discussion[0]
-        if len(extras.get_discussion_tags(id)) == 5:
+        if len(tags.get_discussion_tags(id)) == 5:
             return render_template("error.html", message="Tunnisteita ei voi olla yli viisi")
         else:
-            extras.create_tag(tag, id)
-            discussion_tags = extras.get_discussion_tags(id)
+            tags.create_tag(tag, id)
+            discussion_tags = tags.get_discussion_tags(id)
             return render_template("tags.html", tags = discussion_tags)
         
 @app.route("/discussions/<int:discussion_id>/delete", methods=["POST", "GET"])
@@ -159,3 +160,54 @@ def delete(discussion_id):
             return render_template("error.html", 
                                    message="Viestin poistaminen ei onnistunut")
         return redirect(url_for("show_discussions"))
+    
+@app.route("/ads")
+def advertisments():
+    all_ads = ads.get_all_ads()
+    active_ads = ads.get_active_ads()
+    return render_template("ads.html", all_ads=all_ads, active_ads=active_ads)
+    
+@app.route("/new_ad", methods=["GET", "POST"])
+def new_advertisment():
+    if request.method == "GET":
+        return render_template("new_ad.html")
+    if request.method == "POST":
+        users.check_csrf()
+        advertiser = request.form["advertiser"]
+        content = request.form["content"]
+        level = request.form["level"]
+
+        if len(advertiser) == 0:
+            return render_template("error.html", 
+                                   message="Mainostajan nimi ei voi olla tyhjä")
+        if len(content) == 0:
+            return render_template("error.html", 
+                                   message="Mainoksen sisältö ei voi olla tyhjä")
+        if len(level) == 0:
+            return render_template("error.html", 
+                                   message="Valitse mainokselle joku taso")
+        if not ads.create_ad(advertiser, content, level):
+            return render_template("error.html", 
+                                   message="Mainoksen luominen ei onnistunut")
+        return redirect(url_for("advertisments"))
+    
+@app.route("/ads/<int:ad_id>", methods=["GET", "POST"])
+def ad_information(ad_id):
+    ad_information = ads.get_ad_information(ad_id)
+    return render_template("ad_info.html", ad_information=ad_information)
+    
+@app.route("/ads/<int:ad_id>/activate", methods=["GET","POST"])
+def activate_ad(ad_id):
+    if request.method == "GET":
+        ad_information = ads.get_ad_information(ad_id)
+        level = ad_information[4]
+        now_active = ads.get_active_ad_by_level(level)
+        print(now_active)
+        return render_template("activate.html", ad_id=ad_id, ad_information=ad_information, now_active=now_active)
+    if request.method == "POST":
+        users.check_csrf()
+        level = ads.get_ad_information(ad_id)[4]
+        if not ads.activate_ad(level, ad_id):
+            return render_template("error.html", 
+                                message="Mainoksen aktivointi ei onnistunut")
+        return redirect(url_for("advertisments"))

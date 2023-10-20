@@ -12,10 +12,11 @@ Tykkäyksiä: {{ discussion.likes}} <br>
 {% else %}
 <p class="background_text">Ei hakutuloksia</p>
 {% endif %}
+<br>
 <form action="/result" method="GET">
-    Hakusana: <input type="text" name="query">
+    Hakusana: <input type="text" name="query"><br>
     <br>
-    <input type="submit" value="Lähetä">
+    <input type="submit" class="small_button" value="Hae">
 </form>
 {% endblock %}
 

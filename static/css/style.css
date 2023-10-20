@@ -103,9 +103,14 @@ textarea {
 
   .textbody {
     text-align: left; 
-    padding: 10px; 
     font-size: medium;
     font-family: 'Courier New', Courier, monospace;
+    padding: 1.5em 2em;
+
   }
 
+
+  p.indent {
+    text-indent: 30px;
+  }
   

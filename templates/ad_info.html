@@ -1,0 +1,25 @@
+{% extends "layout.html" %}
+{% block content %}
+<h2> Mainoksen tiedot </h2>
+<b>Mainostaja:</b> {{ ad_information.advertiser }} <br>
+<b>Luotu:</b> {{ ad_information.created.strftime("%d.%m.%Y klo %H:%M") }} <br>
+<b>Taso:</b> {{ ad_information.level }}<br>
+{% if ad_information.status == 1 %}
+<b>Tila:</b> Aktiivinen<br>
+{% else %}
+<b>Tila:</b> Ei aktiivinen<br>
+{% endif %}
+{% if ad_information.status == 0 %}
+{% if session.user_id == ad_information.moderator_id%}
+<div>
+<form action="/ads/{{ ad_information.id }}/activate" method="GET">
+    <input type="submit" class="rightbutton" value="Aktivoi mainos">
+</form>
+</div>
+<br>
+{% endif %}
+{% endif %}
+<p class="textbody">{{ ad_information.content }}</p>
+<br><br>
+{% endblock %}
+

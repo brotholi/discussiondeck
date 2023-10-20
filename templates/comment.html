@@ -6,10 +6,10 @@
 <a href="/loginpage">Kirjaudu</a><br>
 </p>
 {% else %}
-<h3>Lisää kommentti</h3>
+<h3>Lisää kommentti (enintään 100 merkkiä)</h3>
 <form action="/discussions/{{ discussion_id }}/all_comments" method="POST">
-    <textarea id="textbox" name="content" rows="10" cols="50"></textarea><br><br>
-    <input type="submit" class="button" value="Kommentoi">
+    <textarea id="textbox" name="content" rows="10" cols="50" maxlength="100"></textarea><br><br>
+    <input type="submit" class="rightbutton" value="Kommentoi">
     <input type="hidden" name="csrf_token" value="{{ session.csrf_token }}">
 </form>
 {% endif %}
@@ -17,9 +17,14 @@
 {% if not comments %}
 <p class="background_text"> Ei kommentteja </p>
 {% endif %}
-{% for comment in comments %} <br>
+{% for comment in comments %}
+{% if comment.id % 2 == 0 %}
+<p class="graycommentbody">
+{% else %}
+<p class="commentbody">
+{% endif %}
 <b>{{ comment.username }} </b><br>
-{{ comment.comment }} <br>
-{{ comment.created.strftime("%d.%m.%Y klo %H:%M") }} <br>
+{{ comment.created.strftime("%d.%m.%Y klo %H:%M") }}<br>
+{{ comment.comment }} </p>
 {% endfor %}
 {% endblock %}

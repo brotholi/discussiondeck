@@ -9,10 +9,10 @@
 {% else %}
 <b>Luo uusi keskusteluketju</b><br><br>
 <form action="/create" method="POST">
-    <label for="text">Keskustelun aihe:</label><br><br>
-    <textarea id="text" name="topic" rows="2" cols="50"></textarea><br><br>
-    <label for="textbox">Keskustelun aloitusviesti:</label><br><br>
-    <textarea id="textbox" name="content" rows="15" cols="50"></textarea><br><br>    
+    <label for="text">Keskustelun aihe: (max 50 merkkiä)</label><br><br>
+    <textarea id="text" name="topic" rows="2" cols="50" maxlength="40"></textarea><br><br>
+    <label for="textbox">Keskustelun aloitusviesti: (max 500 merkkiä) </label><br><br>
+    <textarea id="textbox" name="content" rows="15" cols="50" maxlength="500"></textarea><br><br>    
     <input type="submit" class="button" value="Luo Keskustelu">
     <input type="hidden" name="csrf_token" value="{{ session.csrf_token }}">
 </form>

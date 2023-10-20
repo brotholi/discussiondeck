@@ -12,6 +12,9 @@
             <li><a href="/discussions">Keskustele</a></li>
             <li><a href="/loginpage">Kirjaudu</a></li>
             <li><a href="/register">Rekisteröidy</a></li>
+            {% if session.user_role == 2 %}
+            <li><a href="/ads">Mainokset</a></li>
+            {% endif %}
         </ul>
     </nav>
     <div class="content">

@@ -42,8 +42,7 @@ CREATE TABLE tags (
 CREATE TABLE likes (
 	id SERIAL PRIMARY KEY,
 	user_id INTEGER REFERENCES users,
-	discussion_id INTEGER REFERENCES discussions,
-	comment_id INTEGER REFERENCES comments
+	discussion_id INTEGER REFERENCES discussions
 );
 
 CREATE TABLE ads (
@@ -52,5 +51,6 @@ CREATE TABLE ads (
 	content TEXT,
 	status INTEGER,
 	level INTEGER,
+	created TIMESTAMP,
 	moderator_id INTEGER REFERENCES users
 );

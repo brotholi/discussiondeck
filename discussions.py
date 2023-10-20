@@ -26,8 +26,8 @@ def get_one_discussion(discussion_id):
     return discussion
 
 def find_discussions_by_keyword(query):
-    sql= "SELECT d.id, d.user_id, u.username, d.topic, d.created, d.likes FROM discussions d JOIN users u ON d.user_id = u.id WHERE d.visible=1 AND d.topic LIKE :keyword ORDER BY d.created DESC"
-    result = db.session.execute(text(sql), {"keyword":query})
+    sql="SELECT d.id, d.user_id, u.username, d.topic, d.created, d.likes FROM discussions d LEFT JOIN users u ON u.id=d.user_id LEFT JOIN tags t ON d.id=t.discussion_id WHERE d.visible=1 AND (d.topic LIKE :keyword OR t.tag LIKE :keyword) ORDER BY d.created DESC"
+    result = db.session.execute(text(sql), {"keyword":"%"+query+"%"})
     discussions = result.fetchall()
     return discussions
     
@@ -37,6 +37,6 @@ def remove_discussion(discussion_id, user_id):
         db.session.execute(text(sql), {"id":discussion_id, "user_id":user_id})
         db.session.commit()
         return True
-    except:
+    except: 
         return False
     
