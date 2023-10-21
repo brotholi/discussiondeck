@@ -1,22 +1,22 @@
 {% extends "layout.html" %}
 {% block title %} Lisää tunnisteita{% endblock %}
 {% block content %}
-<h3>Haluatko lisätä tunnisteita?</h3> 
+<h3>Haluatko lisätä tunnisteita?</h3>
 <p> Tunnisteet eivät ole pakollisia, mutta ne voivat auttaa muita keskustelijoita löytämään keskustelusi.
-Paina <b>valmis</b>, kun olet lisännyt haluamasi tunnisteet tai jos haluat ohittaa toiminnon.</p>
+    Paina <b>valmis</b>, kun olet lisännyt haluamasi tunnisteet tai jos haluat ohittaa toiminnon.</p>
 <h4>Lisää tunnisteita (max 5):</h4>
 <form action="/tags" method="POST">
-Tunniste: <input type="text" name="tag">
-<input type="submit" class="small_button" value="Lisää">
-<input type="hidden" name="csrf_token" value="{{ session.csrf_token }}">
-</form> 
+    Tunniste: <input type="text" name="tag">
+    <input type="submit" class="small_button" value="Lisää" minlength="1" max="10">
+    <input type="hidden" name="csrf_token" value="{{ session.csrf_token }}">
+</form>
 <br>
 <form action="/discussions" method="GET">
-    <input type= "submit" class="rightbutton"  value="Valmis">
+    <input type="submit" class="rightbutton" value="Valmis">
 </form>
-{% if tags %}
-{% for tag in tags %}
-<p class="lila_background_text" >#{{ tag.tag }}</p>
+{% if deck_tags %}
+{% for tag in deck_tags %}
+<p class="lila_background_text">#{{ tag.tag }}</p>
 {% endfor %}
 {% endif %}
 <br>

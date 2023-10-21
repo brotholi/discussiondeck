@@ -7,7 +7,7 @@
 {% for discussion in result %}
 {% if discussion.id and discussion.created and discussion.likes%}
 <b><a href="/discussions/{{ discussion.id }}">{{ discussion.topic }}</a> </b><br>
-Luotu: {{ discussion.created.strftime("%d.%m.%Y klo %H:%M")  }} <br>
+Luotu: {{ discussion.created.strftime("%d.%m.%Y klo %H:%M") }} <br>
 Tykkäyksiä: {{ discussion.likes}} <br>
 <hr>
 {% endif %}
@@ -20,4 +20,3 @@ Tykkäyksiä: {{ discussion.likes}} <br>
     <input type="submit" class="small_button" value="Hae">
 </form>
 {% endblock %}
-

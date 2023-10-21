@@ -2,19 +2,19 @@
 {% block content %}
 
 <h2> Poista keskustelu </h2>
-<p>Haluatko varmasti poistaa keskustelun? </p> 
-<p> Keskustelu poistetaan pysyvästi.</p> 
+<p>Haluatko varmasti poistaa keskustelun? </p>
+<p> Keskustelu poistetaan pysyvästi.</p>
 <br>
 <div style="float:left;">
-<form action="/discussions/{{ discussion_id }}/delete" method="POST">
-    <input type="submit" class="button" value="Poista keskustelu">
-    <input type="hidden" name="csrf_token" value="{{ session.csrf_token }}">
-</form> 
+    <form action="/discussions/{{ discussion_id }}/delete" method="POST">
+        <input type="submit" class="button" value="Poista keskustelu">
+        <input type="hidden" name="csrf_token" value="{{ session.csrf_token }}">
+    </form>
 </div>
 <div style="float:right;">
-<form action="/discussions/{{ discussion_id }}" method="GET">
-    <input type="submit" class="button" value="Peruuta">
-</form>
+    <form action="/discussions/{{ discussion_id }}" method="GET">
+        <input type="submit" class="button" value="Peruuta">
+    </form>
 </div>
 <br>
 <br>

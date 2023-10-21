@@ -1,32 +1,31 @@
 {% extends "layout.html" %}
 {% block content %}
 <h2> Mainoksen tiedot </h2>
-<b>Mainostaja:</b> {{ ad_information.advertiser }} <br>
-<b>Luotu:</b> {{ ad_information.created.strftime("%d.%m.%Y klo %H:%M") }} <br>
-<b>Taso:</b> {{ ad_information.level }}<br>
-{% if ad_information.status == 1 %}
+<b>Mainostaja:</b> {{ ad_info.advertiser }} <br>
+<b>Luotu:</b> {{ ad_info.created.strftime("%d.%m.%Y klo %H:%M") }} <br>
+<b>Taso:</b> {{ ad_info.level }}<br>
+{% if ad_info.status == 1 %}
 <b>Tila:</b> Aktiivinen<br>
 {% else %}
 <b>Tila:</b> Ei aktiivinen<br>
 {% endif %}
-{% if ad_information.status == 0 %}
+{% if ad_info.status == 0 %}
 <div>
-<form action="/ads/{{ ad_information.id }}/activate" method="GET">
-    <input type="submit" class="rightbutton" value="Aktivoi mainos">
-</form>
+    <form action="/ads/{{ ad_info.id }}/activate" method="GET">
+        <input type="submit" class="rightbutton" value="Aktivoi mainos">
+    </form>
 </div>
 <br>
 {% endif %}
-{% if ad_information.status == 1 %}
+{% if ad_info.status == 1 %}
 <div>
-    <form action="/ads/{{ ad_information.id }}/deactivate" method="POST">
+    <form action="/ads/{{ ad_info.id }}/deactivate" method="POST">
         <input type="submit" class="rightbutton" value="Muuta ei-aktiiviseksi">
         <input type="hidden" name="csrf_token" value="{{ session.csrf_token }}">
     </form>
-    </div>
-    <br>
+</div>
+<br>
 {% endif %}
-<p class="textbody">{{ ad_information.content }}</p>
+<p class="textbody">{{ ad_info.content }}</p>
 <br><br>
 {% endblock %}
-

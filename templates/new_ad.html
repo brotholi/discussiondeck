@@ -2,8 +2,9 @@
 {% block title %} Lisää mainos {% endblock %}
 {% block content %}
 <h2> Lisää uusi mainos </h2>
-<p>Lisää uusi mainos Discussiondeck-sivustolle. Voit valita mainokselle joko tason 1, 2 tai 3. Mainoksia näytetään etusivulla. </p>
-<br>    
+<p>Lisää uusi mainos Discussiondeck-sivustolle. Voit valita mainokselle joko tason 1, 2 tai 3. Mainoksia näytetään
+    etusivulla. </p>
+<br>
 <b>Tasot määräytyvät seuraavasti:<br></b>
 <p class="indent"> - Tason 1 mainos näytetään 50 % todennäköisyydellä </p>
 <p class="indent"> - Tason 2 mainos näytetään 35 % todennäköisyydellä </p>
@@ -22,7 +23,7 @@
     <label for="level">Valitse mainoksen taso:</label><br><br>
     <input type="radio" name="level" value="1"> 1. taso
     <input type="radio" name="level" value="2"> 2. taso
-    <input type="radio" name="level" value="3"> 3. taso           
+    <input type="radio" name="level" value="3"> 3. taso
     <input type="hidden" name="csrf_token" value="{{ session.csrf_token }}">
 </form>
 {% endblock %}

@@ -3,13 +3,13 @@
 {% block content %}
 <h1> Etusivu </h1>
 <b>Tervetuloa keskustelemaan</b>! <br>
-{% if ad %}
+{% if displayable_ad %}
 <div style="float:right;">
-    <p class="adtext">
-      <b> {{ ad.advertiser }} mainostaa</b><br>
-      <br>
-      {{ ad.content }}
-    </p>   
+  <p class="adtext">
+    <b> {{ displayable_ad.advertiser }} mainostaa</b><br>
+    <br>
+    {{ displayable_ad.content }}
+  </p>
 </div>
 {% endif %}
 {% if session.username %}
@@ -21,8 +21,8 @@
 <form action="/result" method="GET">
   Hakusana: <input type="text" name="query" minlength="3" maxlength="10">
   <br>
-  <input type="submit" class="small_button" value="Hae" >
-  </form>
+  <input type="submit" class="small_button" value="Hae">
+</form>
 <hr>
 <h3>Uusimmat keskustelut</h3>
 {% for discussion in discussions %}
@@ -34,5 +34,3 @@ Tykkäyksiä: {{ discussion.likes}} <br>
 {% endfor %}
 <a href="/create">Uusi keskustelu</a>
 {% endblock %}
-
-

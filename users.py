@@ -1,9 +1,8 @@
-import os
+from werkzeug.security import check_password_hash, generate_password_hash
 from db import db
 from flask import session, request, abort
 import secrets
 from sqlalchemy.sql import text
-from werkzeug.security import check_password_hash, generate_password_hash
 
 def get_all_users():
     sql = "SELECT id, username FROM users"
@@ -30,7 +29,6 @@ def login(username, password):
     return_values = [True]
     return return_values
 
-    
 def register(username, password1, role):
     if check_if_user_exists(username):
         return False
@@ -43,7 +41,7 @@ def register(username, password1, role):
 
 def logout():
     del session["username"]
-    del session["user_id"] 
+    del session["user_id"]
     del session["user_role"]
     del session["csrf_token"]
     session.permanent = False
@@ -58,7 +56,7 @@ def check_csrf():
 def generate_password(password):
     hash_value = generate_password_hash(password)
     return hash_value
-    
+
 def check_if_user_exists(username):
     sql = "SELECT COUNT(*) FROM users WHERE username=:username"
     result = db.session.execute(text(sql), {"username":username})
@@ -78,6 +76,11 @@ def find_user_id(user_id):
     result = db.session.execute(text(sql), {"user_id":user_id})
     user_id = result.fetchone()[0]
     return user_id
+
+def check_if_user_logged_in():
+    if session.get("user_id", 0) == 0:
+        return False
+    return True
 
 def check_role(role):
     if role > session.get("user_role", 0):

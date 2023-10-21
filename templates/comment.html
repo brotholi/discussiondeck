@@ -3,7 +3,7 @@
 <a href="/discussions/{{ discussion_id }}">Takaisin keskusteluun</a> <br><br>
 {% if not session.username %}
 <p>Et ole kirjautunut sisään<br>
-<a href="/loginpage">Kirjaudu</a><br>
+    <a href="/loginpage">Kirjaudu</a><br>
 </p>
 {% else %}
 <h3>Lisää kommentti (enintään 100 merkkiä)</h3>
@@ -20,11 +20,12 @@
 {% for comment in comments %}
 {% if comment.id % 2 == 0 %}
 <p class="graycommentbody">
-{% else %}
+    {% else %}
 <p class="commentbody">
-{% endif %}
-<b>{{ comment.username }} </b><br>
-{{ comment.created.strftime("%d.%m.%Y klo %H:%M") }}<br>
-{{ comment.comment }} </p>
+    {% endif %}
+    <b>{{ comment.username }} </b><br>
+    {{ comment.created.strftime("%d.%m.%Y klo %H:%M") }}<br>
+    {{ comment.comment }}
+</p>
 {% endfor %}
 {% endblock %}
