@@ -28,7 +28,7 @@ def get_one_discussion(discussion_id):
     return discussion
 
 def find_discussions_by_keyword(query):
-    sql = """SELECT d.id, d.user_id, topic, d.created, d.likes FROM discussions d, tags t"
+    sql = """SELECT d.id, d.user_id, topic, d.created, d.likes FROM discussions d, tags t
              WHERE d.id = t.discussion_id AND d.visible=1
              AND (d.topic LIKE :keyword OR d.content LIKE :keyword OR t.tag LIKE :keyword)
              GROUP BY d.id ORDER BY d.created DESC"""
@@ -39,11 +39,7 @@ def find_discussions_by_keyword(query):
         return []
     return discussions
 
-def remove_discussion(discussion_id, user_id):
-    try:
-        sql = "UPDATE discussions SET visible=0 WHERE id=:id AND user_id=:user_id"
-        db.session.execute(text(sql), {"id":discussion_id, "user_id":user_id})
-        db.session.commit()
-        return True
-    except:
-        return False
+def remove_discussion(discussion_id):
+    sql = "UPDATE discussions SET visible=0 WHERE id=:discussion_id"
+    db.session.execute(text(sql), {"discussion_id":discussion_id})
+    db.session.commit()

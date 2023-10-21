@@ -8,10 +8,14 @@ import ads
 
 @app.route("/")
 def index():
-    all_discussions = discussions.get_discussions()
+    newest_discussions = discussions.get_discussions()
+    if len(newest_discussions) < 5:
+        newest_discussions = newest_discussions
+    else:
+        newest_discussions = newest_discussions[:5]
     all_users = users.get_all_users()
     displayable_ad = ads.show_ad()
-    return render_template("index.html", discussions=all_discussions,
+    return render_template("index.html", newest_discussions=newest_discussions,
                            all_users=all_users, displayable_ad=displayable_ad)
 
 @app.route("/loginpage", methods=["GET", "POST"])
@@ -62,6 +66,9 @@ def register():
 @app.route("/result")
 def query_result():
     query = request.args["query"]
+    if len(query) < 3:
+        return render_template("error.html",
+                               message="Hakusanan oltava vähintään 3 merkkiä pitkä")
     result = discussions.find_discussions_by_keyword(query)
     return render_template("result.html", result=result)
 
@@ -156,9 +163,9 @@ def delete(discussion_id):
     if request.method == "POST":
         users.check_csrf()
         user_id = users.get_user_id()
-        if not discussions.remove_discussion(discussion_id, user_id):
-            return render_template("error.html",
-                                   message="Viestin poistaminen ei onnistunut")
+        if discussions.get_one_discussion(discussion_id)[1] != user_id:
+            users.check_role(2)
+        discussions.remove_discussion(discussion_id)
         return redirect(url_for("show_discussions"))
 
 @app.route("/ads")

@@ -7,9 +7,6 @@
 <br>
 <hr>
 <h3>Tämä mainos aktivoidaan:</h3>
-<u>
-    <h4> Mainoksen tiedot </h4>
-</u>
 <b>Mainostaja:</b> {{ ad_information.advertiser }} <br>
 <b>Luotu:</b> {{ ad_information.created.strftime("%d.%m.%Y klo %H:%M") }} <br>
 <b>Taso:</b> {{ ad_information.level }}<br>
@@ -21,9 +18,6 @@
 <hr>
 {% if now_active %}
 <h3>Tämä mainos muutetaan ei-aktiiviseksi:</h3>
-<u>
-    <h4> Mainoksen tiedot </h4>
-</u>
 <b>Mainostaja:</b> {{ now_active.advertiser }} <br>
 <b>Luotu:</b> {{ now_active.created.strftime("%d.%m.%Y klo %H:%M") }} <br>
 <b>Taso:</b> {{ now_active.level }}<br>

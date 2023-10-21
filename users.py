@@ -83,6 +83,7 @@ def check_if_user_logged_in():
     return True
 
 def check_role(role):
+    print(session.get("user_role", 0))
     if role > session.get("user_role", 0):
         abort(403)
 

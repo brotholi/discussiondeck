@@ -25,7 +25,7 @@
 </form>
 <hr>
 <h3>Uusimmat keskustelut</h3>
-{% for discussion in discussions %}
+{% for discussion in newest_discussions %}
 <b><a href="/discussions/{{ discussion.id }}">{{ discussion.topic }}</a> </b><br>
 Aloittanut: {{ discussion.username }} <br>
 Luotu: {{ discussion.created.strftime("%d.%m.%Y klo %H:%M") }} <br>
