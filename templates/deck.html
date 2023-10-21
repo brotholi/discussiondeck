@@ -1,5 +1,6 @@
 {% extends "layout.html" %}
 {% block content %}
+<a href="/discussions">Takaisin keskusteluihin</a><br>
 <h2> {{ discussion_information[0].topic}} </h2>
 {% if session.username == discussion_information[1] or session.user_role == 2%}
 <div>

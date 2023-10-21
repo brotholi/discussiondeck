@@ -1,7 +1,25 @@
 {% extends "layout.html" %}
 {% block title %} Keskustelut {% endblock %}
 {% block content %}
-<a href="/create">Aloita keskustelu</a></li>
+<a href="/create">Aloita keskustelu</a></li><br>
+<div style="float:right;">
+    <h3>Hae keskusteluja</h3>
+    <form action="/result" method="GET" onsubmit="return check(this)">
+        Hakusana: <input type="text" name="query" maxlength="10"><br>
+        <br>
+        <input type="submit" class="rightbutton" value="Hae">
+    </form>
+</div>
+<script>
+    function check(form) {
+        if (form.query.value.length < 3) {
+            alert("Hakusanan tulee olla vähintään 3 merkkiä pitkä");
+            return false;
+        }
+        return true;
+    }
+</script>
+<br>
 <h2> Keskustelut </h2>
 {% for discussion in discussions %}
 <b><a href="/discussions/{{ discussion.id }}">{{ discussion.topic }}</a> </b><br>

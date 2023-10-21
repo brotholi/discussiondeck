@@ -1,8 +1,12 @@
 {% extends "layout.html" %}
 {% block title %} Hakutulos {% endblock %}
 {% block content %}
+<a href="/discussions">Takaisin keskusteluihin</a><br>
+<br>
 {% if not result %}
 <p class="background_text">Ei hakutuloksia</p><br>
+{% else %}
+<h2>Hakutulokset</h2>
 {% endif %}
 {% for discussion in result %}
 <b><a href="/discussions/{{ discussion[0] }}">{{ discussion[1] }}</a> </b><br>
