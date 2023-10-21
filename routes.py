@@ -86,29 +86,28 @@ def create():
         if len(content) == 0:
             return render_template("error.html",
                                    message="Viesti ei voi olla tyhjä")
-        create_discussion= discussions.create_discussion(topic, content)
-        if not create_discussion:
+        new_discussion_id = discussions.create_discussion(topic, content)[1]
+        if not new_discussion_id:
             return render_template("error.html",
-                                   message="Kirjaudu tai luo käyttäjä ennen viestin luomista")
-        return render_template("tags.html")
+                                   message="Keskustelun luominen ei onnistunut")
+        return redirect(url_for("create_discussion_tags", discussion_id=new_discussion_id))
 
 @app.route("/discussions")
 def show_discussions():
     all_discussions = discussions.get_discussions()
     return render_template("discussions.html", discussions=all_discussions)
 
-@app.route("/discussions/<int:discussion_id>", methods=["GET"])
+@app.route("/discussions/<int:discussion_id>")
 def show_discussion(discussion_id):
-    if request.method == "GET":
-        discussion_information = decks.get_discussion_deck(discussion_id)
-        deck_tags = tags.get_discussion_tags(discussion_id)
-        discussion_comments = decks.get_comments(discussion_id)
-        if len(discussion_comments) <= 5:
-            deck_comments = discussion_comments
-        else:
-            deck_comments = discussion_comments[:5]
-        return render_template("deck.html", discussion_information=discussion_information,
-                               deck_tags=deck_tags, comments=deck_comments)
+    discussion_information = decks.get_discussion_deck(discussion_id)
+    deck_tags = tags.get_discussion_tags(discussion_id)
+    discussion_comments = decks.get_comments(discussion_id)
+    if len(discussion_comments) <= 5:
+        deck_comments = discussion_comments
+    else:
+        deck_comments = discussion_comments[:5]
+    return render_template("deck.html", discussion_information=discussion_information,
+                            deck_tags=deck_tags, comments=deck_comments)
 
 @app.route("/discussions/<int:discussion_id>/like", methods=["POST"])
 def like(discussion_id):
@@ -117,7 +116,7 @@ def like(discussion_id):
     if not decks.like(user_id, discussion_id):
         return render_template("error.html",
                                message="Olet jo tykännyt keskustelusta")
-    return redirect(url_for('show_discussion',discussion_id = discussion_id))
+    return redirect(url_for("show_discussion", discussion_id = discussion_id))
 
 @app.route("/discussions/<int:discussion_id>/all_comments", methods=["GET", "POST"])
 def comment(discussion_id):
@@ -134,25 +133,25 @@ def comment(discussion_id):
         if not decks.comment(discussion_id, comment_content):
             return render_template("error.html",
                                 message="Kirjaudu tai luo käyttäjä ennen kommentin lisäämistä")
-        return redirect(url_for('show_discussion', discussion_id = discussion_id))
+        return redirect(url_for('show_discussion', discussion_id=discussion_id))
 
-@app.route("/tags", methods=["GET", "POST"])
-def create_discussion_tags():
+@app.route("/discussions/<int:discussion_id>/tags", methods=["GET", "POST"])
+def create_discussion_tags(discussion_id):
     if request.method == "GET":
-        return render_template("tags.html")
+        deck_tags = tags.get_discussion_tags(discussion_id)
+        if len(deck_tags) == 5:
+            return redirect(url_for("show_discussions"))
+        return render_template("tags.html", discussion_id=discussion_id, deck_tags=deck_tags)
     if request.method == "POST":
         users.check_csrf()
         tag = request.form["tag"]
         if len(tag) == 0:
             return render_template("error.html",
                                 message="Tunniste ei voi olla tyhjä")
-        all_discussions = discussions.get_discussions()
-        discussion_id = all_discussions[0][0]
-        if len(tags.get_discussion_tags(discussion_id)) == 5:
-            return render_template("error.html", message="Tunnisteita ei voi olla yli viisi")
-        tags.create_tag(tag, discussion_id)
+        if len(tags.get_discussion_tags(discussion_id)) < 5:
+            tags.create_tag(tag, discussion_id)
         deck_tags = tags.get_discussion_tags(discussion_id)
-        return render_template("tags.html", deck_tags=deck_tags)
+        return redirect(url_for("create_discussion_tags", discussion_id=discussion_id))
 
 @app.route("/discussions/<int:discussion_id>/delete", methods=["POST", "GET"])
 def delete(discussion_id):

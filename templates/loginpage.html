@@ -3,7 +3,7 @@
 {% block content %}
 <h2> Kirjautuminen </h2>
 <b>Kirjaudu sisään:</b>
-<form action="/loginpage" method="POST">
+<form action="/loginpage" method="POST" onsubmit="return check(this)">
     <p>Käyttäjätunnus:<br>
         <input type="text" name="username">
     </p>
@@ -12,6 +12,19 @@
     </p>
     <input type="submit" class="button" value="Kirjaudu">
 </form>
+<script>
+    function check(form) {
+        if (form.username.value.length < 3) {
+            alert("Käyttäjätunnuksen tulee olla vähintään 3 merkkiä pitkä");
+            return false;
+        }
+        if (form.password.value.length < 1) {
+            alert("Syötä salasana");
+            return false;
+        }
+        return true;
+    }
+</script>
 Oletko uusi käyttäjä? Rekisteröidy <a href="/register">tästä</a> <br>
 <a href="/">Takaisin etusivulle</a>
 {% endblock %}

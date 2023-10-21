@@ -18,11 +18,20 @@
 {% endif %}
 <br>
 <h3>Hae keskusteluja</h3>
-<form action="/result" method="GET">
+<form action="/result" method="GET" onsubmit="return check(this)">
   Hakusana: <input type="text" name="query" minlength="3" maxlength="10">
   <br>
   <input type="submit" class="small_button" value="Hae">
 </form>
+<script>
+  function check(form) {
+      if (form.query.value.length < 3) {
+          alert("Hakusanan tulee olla vähintään 3 merkkiä pitkä");
+          return false;
+      }
+      return true;
+  }
+</script>
 <hr>
 <h3>Uusimmat keskustelut</h3>
 {% for discussion in newest_discussions %}

@@ -6,7 +6,7 @@
 <p>Kirjaudu ulos ennen rekisteröitymistä</p><br>
 <a href="/logout">Kirjaudu ulos</a><br>
 {% else %}
-<form action="/register" method="POST">
+<form action="/register" method="POST" onsubmit="return check(this)">
     <p>Anna käyttäjätunnus:<br>
         <input type="text" name="username">
     </p>
@@ -26,6 +26,23 @@
     <p>Huom! Käyttäjätunnuksen on oltava vähintään 3 merkkiä pitkä<br>
         <input type="submit" class="rightbutton" value="Luo käyttäjä">
 </form>
+<script>
+    function check(form) {
+        if (form.username.value.length < 3) {
+            alert("Käyttäjätunnuksen tulee olla vähintään 3 merkkiä pitkä");
+            return false;
+        }
+        if (form.password1.value.length < 1) {
+            alert("Syötä salasana");
+            return false;
+        }
+        if (form.password2.value.length < 1) {
+            alert("Syötä salasana uudelleen");
+            return false;
+        }
+        return true;
+    }
+</script>
 <br><br>
 {% endif %}
 {% endblock %}

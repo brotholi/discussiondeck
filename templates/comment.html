@@ -7,11 +7,20 @@
 </p>
 {% else %}
 <h3>Lisää kommentti (enintään 100 merkkiä)</h3>
-<form action="/discussions/{{ discussion_id }}/all_comments" method="POST">
+<form action="/discussions/{{ discussion_id }}/all_comments" method="POST" onsubmit="return check(this)">
     <textarea id="textbox" name="content" rows="10" cols="50" maxlength="100"></textarea><br><br>
     <input type="submit" class="rightbutton" value="Kommentoi">
     <input type="hidden" name="csrf_token" value="{{ session.csrf_token }}">
 </form>
+<script>
+    function check(form) {
+        if (form.content.value.length < 3) {
+            alert("Kommentin tulee olla vähintään 3 merkkiä pitkä");
+            return false;
+        }
+        return true;
+    }
+</script>
 {% endif %}
 <h3>Kommentit</h3>
 {% if not comments %}

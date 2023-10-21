@@ -12,13 +12,18 @@ def get_discussions():
 
 def create_discussion(topic, content):
     if not users.check_if_user_logged_in():
-        return False
+        return_values = [False]
+        return return_values
     user_id = users.get_user_id()
     sql = """INSERT INTO discussions (user_id, topic, created, likes, content, visible)
              VALUES (:user_id, :topic, NOW(), 0, :content, 1) RETURNING id"""
     db.session.execute(text(sql), {"topic":topic, "user_id":user_id, "content":content})
     db.session.commit()
-    return True
+    sql = "SELECT LASTVAL()"
+    result = db.session.execute(text(sql))
+    discussion_id = result.fetchone()[0]
+    return_values = [True, discussion_id]
+    return return_values
 
 def get_one_discussion(discussion_id):
     sql = """SELECT id, user_id, topic, created, likes, content
@@ -40,3 +45,10 @@ def remove_discussion(discussion_id):
     sql = "UPDATE discussions SET visible=0 WHERE id=:discussion_id"
     db.session.execute(text(sql), {"discussion_id":discussion_id})
     db.session.commit()
+
+def find_newest_discussion():
+    sql = """SELECT id, user_id, topic, created, likes, content FROM discussions
+             WHERE visible=1 ORDER BY created DESC LIMIT 1"""
+    result = db.session.execute(text(sql))
+    discussion = result.fetchone()
+    return discussion
