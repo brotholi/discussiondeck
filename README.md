@@ -19,9 +19,6 @@ Discussiondeck-sovellus on keskustelualusta, jossa käyttäjät voivat aloittaa 
 - Ylläpitäjä voi poistaa minkä tahansa keskusteluketjun
 - Ylläpitäjä voi lisätä sovellukseen mainoksia ja aktivoida niitä. Kolme mainosta voi olla kerrallaan aktiivisina. 
 
-### TODO:
-- virheilmoitusten siistiminen
-
 ## Käynnistysohjeet:
 Ennen käynnistystä asenna PostgreSQL kurssin ohjeiden mukaisesti ja käynnistä tietokanta komennolla start-pg.sh
 
