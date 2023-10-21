@@ -9,7 +9,7 @@ Discussiondeck-sovellus on keskustelualusta, jossa käyttäjät voivat aloittaa 
 - Käyttäjät voivat kirjautua sovellukseen.
 - Sovelluksessa kahdenlaisia käyttäjiä, ylläpitäjiä ja tavallisia käyttäjiä.
 - Käyttäjät voivat aloittaa uuden keskusteluketjun ja antaa sille otsikon. Ketjulle annetaan myös sisältö.
-- Keskusteluketjuun voi lisätä tunnisteen tai niin sanotun tagin perustamisvaiheessa.
+- Keskusteluketjuun voi lisätä tunnisteen tai niin sanotun tagin perustamisvaiheessa. Tunnisteita voi olla enintään viisi.
 - Kirjautuneet käyttäjät voivat tykätä ketjusta. Ketjusta voi tykätä vain kerran.
 - Käyttäjät voivat lisätä ketjuun kommentteja.
 - Etusivulla näkyy kerrallaan yksi aktiivisista mainoksista. Mainoksen taso määrittää sen, kuinka suurella todennäköisyydellä mainos näytetään.
