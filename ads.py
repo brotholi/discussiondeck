@@ -47,12 +47,11 @@ def create_ad(arvertiser, content, level):
 def activate_ad(level, ad_id):
     deactivated_ad = get_active_ad_by_level(level)
     if deactivated_ad:
-        if not deactivate_ad(deactivated_ad[0]):
-            return False
+        deactivate_ad(deactivated_ad[0])
     sql = "UPDATE ads SET status=1 WHERE id=:ad_id"
     db.session.execute(text(sql), {"ad_id":ad_id})
     db.session.commit()
-    return True
+
 
 def get_ad_information(ad_id):
     sql = """SELECT id, advertiser, content, status, level, created, moderator_id
@@ -62,11 +61,6 @@ def get_ad_information(ad_id):
     return ad_information
 
 def deactivate_ad(ad_id):
-    try:
-        sql = "UPDATE ads SET status=0 WHERE id=:ad_id"
-        db.session.execute(text(sql), {"ad_id":ad_id})
-        db.session.commit()
-        return True
-    except:
-        return False
-    
+    sql = "UPDATE ads SET status=0 WHERE id=:ad_id"
+    db.session.execute(text(sql), {"ad_id":ad_id})
+    db.session.commit()

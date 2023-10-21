@@ -34,9 +34,6 @@ def find_discussions_by_keyword(query):
              GROUP BY d.id ORDER BY d.created DESC"""
     result = db.session.execute(text(sql), {"keyword":"%"+query+"%"})
     discussions = result.fetchall()
-    #TODO
-    if not discussions:
-        return []
     return discussions
 
 def remove_discussion(discussion_id):

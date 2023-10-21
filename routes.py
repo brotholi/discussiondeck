@@ -1,5 +1,5 @@
+from flask import redirect, render_template, request, url_for
 from app import app
-from flask import redirect, render_template, request, url_for, session
 import discussions
 import users
 import decks
@@ -8,11 +8,11 @@ import ads
 
 @app.route("/")
 def index():
-    newest_discussions = discussions.get_discussions()
-    if len(newest_discussions) < 5:
-        newest_discussions = newest_discussions
+    all_discussions = discussions.get_discussions()
+    if len(all_discussions) < 5:
+        newest_discussions = all_discussions
     else:
-        newest_discussions = newest_discussions[:5]
+        newest_discussions = all_discussions[:5]
     all_users = users.get_all_users()
     displayable_ad = ads.show_ad()
     return render_template("index.html", newest_discussions=newest_discussions,
@@ -147,8 +147,7 @@ def create_discussion_tags():
             return render_template("error.html",
                                 message="Tunniste ei voi olla tyhjä")
         all_discussions = discussions.get_discussions()
-        newest_discussion = all_discussions[0]
-        discussion_id = newest_discussion[0]
+        discussion_id = all_discussions[0][0]
         if len(tags.get_discussion_tags(discussion_id)) == 5:
             return render_template("error.html", message="Tunnisteita ei voi olla yli viisi")
         tags.create_tag(tag, discussion_id)
@@ -213,15 +212,11 @@ def activate_ad(ad_id):
     if request.method == "POST":
         users.check_csrf()
         level = ads.get_ad_information(ad_id)[4]
-        if not ads.activate_ad(level, ad_id):
-            return render_template("error.html",
-                                message="Mainoksen aktivointi ei onnistunut")
+        ads.activate_ad(level, ad_id)
         return redirect(url_for("advertisments"))
 
 @app.route("/ads/<int:ad_id>/deactivate", methods=["POST"])
 def deactivate_ad(ad_id):
     users.check_csrf()
-    if not ads.deactivate_ad(ad_id):
-        return render_template("error.html",
-                                message="Mainoksen deaktivointi ei onnistunut")
+    ads.deactivate_ad(ad_id)
     return redirect(url_for("advertisments"))
