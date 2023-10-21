@@ -3,16 +3,13 @@
 {% block content %}
 {% if not result %}
 <p class="background_text">Ei hakutuloksia</p><br>
-{% else %}
+{% endif %}
 {% for discussion in result %}
-{% if discussion.id and discussion.created and discussion.likes%}
-<b><a href="/discussions/{{ discussion.id }}">{{ discussion.topic }}</a> </b><br>
-Luotu: {{ discussion.created.strftime("%d.%m.%Y klo %H:%M") }} <br>
-Tykkäyksiä: {{ discussion.likes}} <br>
+<b><a href="/discussions/{{ discussion[0] }}">{{ discussion[1] }}</a> </b><br>
+Luotu: {{ discussion[2].strftime("%d.%m.%Y klo %H:%M") }} <br>
+Tykkäyksiä: {{ discussion[3] }} <br>
 <hr>
-{% endif %}
 {% endfor %}
-{% endif %}
 <br>
 <form action="/result" method="GET" onsubmit="return check(this)">
     Hakusana: <input type="text" name="query" maxlength="10"><br>

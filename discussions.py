@@ -33,7 +33,7 @@ def get_one_discussion(discussion_id):
     return discussion
 
 def find_discussions_by_keyword(query):
-    sql = """SELECT d.id, d.user_id, topic, d.created, d.likes FROM discussions d, tags t
+    sql = """SELECT d.id, topic, d.created, d.likes FROM discussions d, tags t
              WHERE d.id = t.discussion_id AND d.visible=1
              AND (d.topic LIKE :keyword OR d.content LIKE :keyword OR t.tag LIKE :keyword)
              GROUP BY d.id ORDER BY d.created DESC"""
