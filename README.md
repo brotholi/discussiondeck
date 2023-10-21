@@ -13,7 +13,7 @@ Discussiondeck-sovellus on keskustelualusta, jossa käyttäjät voivat aloittaa 
 - Kirjautuneet käyttäjät voivat tykätä ketjusta. Ketjusta voi tykätä vain kerran.
 - Käyttäjät voivat lisätä ketjuun kommentteja.
 - Etusivulla näkyy kerrallaan yksi aktiivisista mainoksista. Mainoksen taso määrittää sen, kuinka suurella todennäköisyydellä mainos näytetään.
-- Jos mainoksia ei ole lisätty jollekin tasolle, ei todennäköisyys muutu eikä mainoksia näytetä, jos niitä ei ole. 
+- Jos mainoksia ei ole lisätty jollekin tasolle, ei muiden mainosten todennäköisyys muutu. Mainoksia ei näytetä, jos niitä ei ole. 
 - Sovelluksessa on hakutoiminto, jolla voi hakea ketjuja. Hakutoiminto etsii ketjuja, joiden otsikossa, sisällössä tai tagissa on vastaava sana.
 - Ketjun perustanut käyttäjä voi poistaa ketjun. Muut tavalliset käyttäjät eivät voi poistaa ketjua.
 - Ylläpitäjä voi poistaa minkä tahansa keskusteluketjun
