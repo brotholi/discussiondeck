@@ -16,8 +16,8 @@ Discussiondeck-sovellus on keskustelualusta, jossa käyttäjät voivat aloittaa 
 - Ketjun perustanut käyttäjä voi poistaa ketjun. Muut tavalliset käyttäjät eivät voi poistaa ketjua.
 - Ylläpitäjä voi poistaa minkä tahansa keskusteluketjun
 - Ylläpitäjä voi lisätä sovellukseen mainoksia ja aktivoida niitä. Kolme mainosta, eli yksi kullakin tasolla, voi olla kerrallaan aktiivisina.
-- Etusivulla näkyy kerrallaan yksi aktiivisista mainoksista. Mainoksen taso määrittää sen, kuinka suurella todennäköisyydellä mainos näytetään.
-- Jos mainoksia ei ole lisätty jollekin tasolle, ei muiden mainosten todennäköisyys muutu. Mainoksia ei näytetä, jos niitä ei ole. 
+- Etusivulla näkyy kerrallaan yksi aktiivisista mainoksista. Mainoksen taso määrittää sen, kuinka suurella todennäköisyydellä mainos näytetään. Ensimmäisen tason mainos näytetään 50 % todennäköisyydellä, toisen 35 % todennäköisyydellä ja kolmannen 15 % todennäköisyydellä.
+- Jos mainoksia ei ole lisätty tai aktivoitu jollekin tasolle, ei muiden mainosten todennäköisyys muutu. Mainoksia ei näytetä, jos niitä ei ole aktiivisina. 
 
 
 
