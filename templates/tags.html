@@ -3,7 +3,7 @@
 {% block content %}
 <h3>Haluatko lisätä tunnisteita?</h3>
 <p> Tunnisteet eivät ole pakollisia, mutta ne voivat auttaa muita keskustelijoita löytämään keskustelusi.
-    Paina <b>ohita</b>, jos haluat ohittaa toiminnon.</p>
+    Paina <b>valmis</b>, kun olet lisännyt haluamasi tunnisteet tai jos haluat ohittaa toiminnon.</p>
 <h4>Lisää tunnisteita (max 5):</h4>
 <form action="/discussions/{{ discussion_id }}/tags" method="POST" onsubmit="return check(this)">
     Tunniste: <input type="text" name="tag">
@@ -21,7 +21,7 @@
 </script>
 <br>
 <form action="/discussions" method="GET">
-    <input type="submit" class="rightbutton" value="Ohita">
+    <input type="submit" class="rightbutton" value="Valmis">
 </form>
 {% if deck_tags %}
 {% for tag in deck_tags %}
